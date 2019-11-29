@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
+  m_Name: Hello World
+  m_EditorClassIdentifier: 
+  folderName: HelloWorld
+  mapNames:
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Easy]
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Normal]
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Hard]
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Insane]
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Habi's Insane]
+  - BUMP OF CHICKEN - Hello,world! (tutuhaha) [Extra]
+  audioFile: {fileID: 8300000, guid: ef22f1284bb46cb46b3d7aeefc7c7664, type: 3}
