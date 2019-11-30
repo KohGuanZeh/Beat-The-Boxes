@@ -28,6 +28,7 @@ public class LambdaExpressionExample
 #endregion
 
 //Developed by Koh Guan Zeh
+//Last Updated 30 Nov 2019
 namespace XellExtraUtils
 {
 	public static class MathFunctions
@@ -264,5 +265,4 @@ namespace XellExtraUtils
 			foreach (Material mat in mats) mat.SetColor(emissionProperty, color * intensity);
 		}
 	}
-
 }

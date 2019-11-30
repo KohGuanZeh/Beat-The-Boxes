@@ -1,10 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using OsuParsers.Beatmaps;
 using OsuParsers.Beatmaps.Objects;
+using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Decoders;
 
 public class GameManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] List<HitObject> beats;
 
 	[Header("Track Time")]
+	[SerializeField] float trackDelayTime;
 	[SerializeField] double trackStartTime;
 
 	[Header("For Beat Instantiation")]
@@ -29,43 +31,54 @@ public class GameManager : MonoBehaviour
 	[SerializeField] float bufferTime; //Number of Seconds 
 	[SerializeField] float startTimeOffset; //Number of Seconds before the Song Plays
 	[SerializeField] Beat[] beatPrefabs; //Colors are indicated in Beat.cs
+	[SerializeField] int colorIndex;
 	[SerializeField] Transform beatSpawnPos, beatHitPos;
 	[SerializeField] float spawnHitDist;
 	[SerializeField] Transform beatsParent;
-	[SerializeField] Stopwatch watch;
+
+	[Header("For Slider Configuration")]
+	[Range(0.1f, 0.5f)] [SerializeField] float sliderThreshold;
 
 	[Header("For Scoring")]
 	[SerializeField] int score;
 	[SerializeField] int combo;
-	[SerializeField] float myTime;
 
 	[Header("For Developers Use")]
 	public bool autoMode;
-	bool spawned;
+	public bool showStartDebug;
+	public bool spawnOnlyOneBeat;
+	public List<string> sliderInfo;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		songPlayer = GetComponent<AudioSource>();
-		
-		//SO Method
-		string mapPath = GetMapPath(selectedMap.folderName, selectedMap.mapNames[mapIndex]);
-		songPlayer.clip = selectedMap.audioFile;
-		beatmap = BeatmapDecoder.Decode(mapPath);
-		beats = beatmap.HitObjects;
+		InitialiseBeatMap(selectedMap, mapIndex);
 
-		spawnHitDist = beatHitPos.transform.position.z - beatSpawnPos.transform.position.z;
-		//beatMoveDir = spawnHitDist < 0 ? -1f : 1f;
+		if (showStartDebug)
+		{
+			ColoursSection colours = beatmap.ColoursSection;
+			for (int i = 0; i < colours.ComboColours.Count; i++)
+			{
+				print(colours.ComboColours[i]);
+			}
 
-		bufferTime = Mathf.Abs(spawnHitDist) / scrollSpeed;
+			sliderInfo = new List<string>();
+			for (int i = 0; i < beats.Count; i++)
+			{
+				if (beats[0].GetType() != typeof(Slider))
+				{
+					print(string.Format("Index {0} skipped!", i));
+					continue;
+				}
 
-		startTimeOffset = 1.5f;
-		float firstBeatTime = (float)beats[0].StartTime / 1000;
-		if (firstBeatTime < bufferTime) startTimeOffset += (bufferTime - firstBeatTime);
+				string printString = string.Format("Index Slider = {0}. Start Time = {1}ms. End Time = {2}ms. Slider Length = {3}ms. Start Time Span = {4}ms. End Time Span = {5}ms. Total Time Span = {6}ms.",
+				i, beats[i].StartTime, beats[i].EndTime, beats[i].EndTime - beats[i].StartTime, beats[i].StartTimeSpan.TotalMilliseconds, beats[i].EndTimeSpan.TotalMilliseconds, beats[i].TotalTimeSpan.TotalMilliseconds);
 
-		trackStartTime = AudioSettings.dspTime + startTimeOffset;
-		songPlayer.PlayScheduled(trackStartTime);
-		print(trackStartTime);
+				sliderInfo.Add(printString);
+				print(printString);
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -76,23 +89,87 @@ public class GameManager : MonoBehaviour
 			if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
 		}
 
-		if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
+		if (Input.GetKeyDown(KeyCode.Alpha0)) InitialiseBeatMap(selectedMap, mapIndex);
+
+		//if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
 	}
+
+	#region Beat Map Initialisation
+	public void InitialiseBeatMap(BeatmapObject selectedMap, int mapIndex)
+	{
+		this.selectedMap = selectedMap;
+		this.mapIndex = mapIndex;
+
+		if (mapIndex >= selectedMap.mapInfos.Length)
+		{
+			UnityEngine.Debug.LogError("Map Index Exceeds the Length of the Beat Map. Ensure that the Map Index is within the Array Length");
+			return;
+		}
+
+		//SO Method
+		string mapPath = GetMapPath(selectedMap.folderName, selectedMap.mapInfos[mapIndex].mapName);
+		songPlayer.clip = selectedMap.audioFile;
+		beatmap = BeatmapDecoder.Decode(mapPath);
+		beats = beatmap.HitObjects;
+
+		spawnHitDist = beatHitPos.transform.position.z - beatSpawnPos.transform.position.z;
+		//beatMoveDir = spawnHitDist < 0 ? -1f : 1f;
+
+		bufferTime = Mathf.Abs(spawnHitDist) / scrollSpeed;
+
+		startTimeOffset = trackDelayTime;
+		float firstBeatTime = (float)beats[0].StartTime / 1000;
+		if (firstBeatTime < bufferTime) startTimeOffset += (bufferTime - firstBeatTime);
+
+		trackStartTime = AudioSettings.dspTime + startTimeOffset;
+		songPlayer.PlayScheduled(trackStartTime);
+	}
+	#endregion
 
 	#region For Beat Spawning
 	void SpawnBeat()
 	{
 		//What Beat to Spawn
-		int i = UnityEngine.Random.Range(0,4);
-		if (beats[0].GetType() == typeof(Slider) && beats[0].TotalTimeSpan.TotalSeconds > 1) i = 5;
-		Beat beat = Instantiate(beatPrefabs[i], beatSpawnPos.position, Quaternion.identity);
+		if (beats[0].IsNewCombo)
+		{
+			int prevColor = colorIndex;
+			while (colorIndex == prevColor) colorIndex = UnityEngine.Random.Range(0, 4); //Randomise until you get a Different Color
+		}
 
-		beat.AssignGM(this);
-		beat.InitialiseBeat(GetTrackTime(), beats[0].StartTime, beats[0].StartTime, beatSpawnPos.position, spawnHitDist);
-		beat.MoveBeatPosition();
-		beat.transform.parent = beatsParent;
+		//Check if Beat is a Slider
+		double beatLength = beats[0].EndTime - beats[0].StartTime; //Get Total Time Span of Beat 
+
+		if (beatLength > 0) //If it Qualifies as a Slider
+		{
+			int beatsToSpawn = Mathf.FloorToInt((float)(beatLength/(sliderThreshold * 1000))); //Check how many beats to spawn
+			print(string.Format("Function Calculates such that it is to spawn {0} Additional Beats. Beat Length is {1}, Slider Threshold is {2}", beatsToSpawn, beatLength, sliderThreshold * 1000));
+			double beatInterval = beatsToSpawn == 0 ? 0 : beatLength / beatsToSpawn;
+			print("Beat Interval is " + beatInterval);
+
+			for (int i = 0; i <= beatsToSpawn; i++)
+			{
+				Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+
+				beat.AssignGM(this);
+				double additionalOffset = beatInterval * i;
+				beat.InitialiseBeat(GetTrackTime() + additionalOffset/1000, beats[0].StartTime + additionalOffset, beatSpawnPos.position, spawnHitDist);
+				beat.MoveBeatPosition();
+				beat.transform.parent = beatsParent;
+			}
+		}
+		else
+		{
+			Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+
+			beat.AssignGM(this);
+			beat.InitialiseBeat(GetTrackTime(), beats[0].StartTime, beatSpawnPos.position, spawnHitDist);
+			beat.MoveBeatPosition();
+			beat.transform.parent = beatsParent;
+		}
 
 		beats.RemoveAt(0);
+
+		if (spawnOnlyOneBeat) beats.Clear();
 	}
 
 	//When the Song has ended, a Figure should run towards the Player. 
@@ -102,8 +179,7 @@ public class GameManager : MonoBehaviour
 	//Use Invoke Repeating for the Heatbeats and Combos for Accurate time (if needed)
 	void OnSongEnd()
 	{
-		string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-		UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+		
 	}
 	#endregion
 

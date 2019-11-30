@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: As You Like It
   m_EditorClassIdentifier: 
   folderName: AsYouLikeIt
-  mapNames:
-  - Eve - As You Like It (Anishina Kodoku) [Hard]
-  - Eve - As You Like It (Anishina Kodoku) [619's Insane]
-  - Eve - As You Like It (Anishina Kodoku) [Honne]
+  mapInfos:
+  - mapName: Eve - As You Like It (Anishina Kodoku) [Hard]
+    difficulty: 6.5
+  - mapName: Eve - As You Like It (Anishina Kodoku) [619's Insane]
+    difficulty: 7
+  - mapName: Eve - As You Like It (Anishina Kodoku) [Honne]
+    difficulty: 8
   audioFile: {fileID: 8300000, guid: e8e8125b77558704ab61c5f668cb5390, type: 3}

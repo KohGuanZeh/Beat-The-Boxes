@@ -53,7 +53,7 @@ public class Beat : MonoBehaviour
 		if (this.gm == null) this.gm = gm;
 	}
 
-	public void InitialiseBeat(double spawnedTime, double targetTime, double destroyTime, Vector3 spawnPos, float spawnHitDist)
+	public void InitialiseBeat(double spawnedTime, double targetTime, Vector3 spawnPos, float spawnHitDist)
 	{
 		beatMeshObj = transform.GetChild(0);
 
@@ -136,6 +136,7 @@ public class Beat : MonoBehaviour
 	public void MoveBeatPosition()
 	{
 		float zOffset = Mathf.LerpUnclamped(0, spawnHitDist, GetOffsetRatio());
+		if (float.IsNaN(zOffset)) zOffset = 0;
 		float xOffset = xDisplacement; //Mathf.Lerp(xDisplacement, finalXDisplacement, GetOffsetRatio());
 		float yOffset = yMultiplier; //boxType == BoxType.Large ? 0 : yPosOverTime.Evaluate(GetOffsetRatio()) * yMultiplier;
 		transform.position = spawnPos + new Vector3(xOffset, yOffset, zOffset);

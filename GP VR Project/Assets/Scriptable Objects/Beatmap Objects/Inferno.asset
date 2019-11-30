@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
+  m_Name: Inferno
+  m_EditorClassIdentifier: 
+  folderName: Inferno
+  mapInfos:
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Easy]
+    difficulty: 2
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Normal]
+    difficulty: 4
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Hard]
+    difficulty: 6
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Insane]
+    difficulty: 7.5
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Monstrata's Insane]
+    difficulty: 8
+  - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Fire Force]
+    difficulty: 8.5
+  audioFile: {fileID: 8300000, guid: 22fd2a8b339e3e548aa536b05ce3ad67, type: 3}

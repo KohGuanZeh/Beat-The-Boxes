@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   folderName: FistBump
   mapNames:
-  - Sonic Forces OST - Fist Bump (Plxsma) [Stage IV]
-  - Sonic Forces OST - Fist Bump (Plxsma) [Stage V]
-  - Sonic Forces OST - Fist Bump (Plxsma) [Stage VI]
-  - Sonic Forces OST - Fist Bump (Plxsma) [Stage VII]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Ascendance's Ultimate]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Cup]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Overdose]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Platter]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Rain]
+  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Salad]
   audioFile: {fileID: 8300000, guid: de48c987f08bd2e48be163da18e549c3, type: 3}
