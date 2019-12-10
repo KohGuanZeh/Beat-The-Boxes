@@ -18,7 +18,7 @@ public class Beat : MonoBehaviour, IPooledObject
 	[SerializeField] float startXDisplaceVal = 0.5f;
 	[SerializeField] float finalXDisplaceVal = 0.15f;
 	[SerializeField] Transform beatMeshObj;
-	[SerializeField] bool initialised;
+	[SerializeField] bool endViaHit;
 
 	[Header("Beat Attributes")]
 	public BoxType boxType;
@@ -85,7 +85,7 @@ public class Beat : MonoBehaviour, IPooledObject
 								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot),
 								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot));
 
-		initialised = true;
+		endViaHit = false;
 
 		print(string.Format("Beat initialised. Transform is: {0}. Target Time is: {1}. Spawned Time is: {2}. Spawn Position is: {3} Box Color is: {4}", transform.position.z, this.targetTime, this.spawnedTime, this.spawnPos, boxColor));
 	}
@@ -129,10 +129,11 @@ public class Beat : MonoBehaviour, IPooledObject
 	{
 		//Play Sound Effect
 		gm.AddScore();
-		ObjectPooling.inst.SpawnFromPool("Particles", transform.position, Quaternion.identity);
-		float zOffset = Mathf.LerpUnclamped(0, spawnHitDist, GetOffsetRatio());
-		print(string.Format("Offset is: {0}, Transform is: {1}. HitCount is {2}. Target Time is: {3}. Spawned Time is: {4}. Spawn Position is: {5} Box Color is: {6}", zOffset, transform.position.z, ++hitCount, targetTime, spawnedTime, spawnPos, boxColor));
-		if (destroy) ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag());
+		endViaHit = true;
+		//ObjectPooling.inst.SpawnFromPool("Particles", transform.position, Quaternion.identity);
+		//float zOffset = Mathf.LerpUnclamped(0, spawnHitDist, GetOffsetRatio());
+		//print(string.Format("Offset is: {0}, Transform is: {1}. HitCount is {2}. Target Time is: {3}. Spawned Time is: {4}. Spawn Position is: {5} Box Color is: {6}", zOffset, transform.position.z, ++hitCount, targetTime, spawnedTime, spawnPos, boxColor));
+		if (destroy) ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
 	}
 	#endregion
 
@@ -173,7 +174,7 @@ public class Beat : MonoBehaviour, IPooledObject
 
 	public void OnObjectDespawn()
 	{
-		initialised = false;
+		if (!endViaHit) print("Hmmmm");
 	}
 
 	public string GetPoolTag()

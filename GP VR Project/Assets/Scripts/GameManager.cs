@@ -225,6 +225,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
+			//Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
 			Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity).GetComponent<Beat>();
 
 			beat.AssignGM(this);
