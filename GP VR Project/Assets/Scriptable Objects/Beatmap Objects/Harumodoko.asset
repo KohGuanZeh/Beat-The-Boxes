@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
+  m_Name: Harumodoko
+  m_EditorClassIdentifier: 
+  folderName: Harumodoki (TV Size) - 545139
+  mapInfos:
+  - mapName: yanaginagi - Harumodoki (TV Size) (In your heart) [Normal]
+    difficulty: 4
+  - mapName: yanaginagi - Harumodoki (TV Size) (In your heart) [Hard]
+    difficulty: 7
+  - mapName: yanaginagi - Harumodoki (TV Size) (In your heart) [Insane]
+    difficulty: 8
+  audioFile: {fileID: 8300000, guid: 660e4a98e1f5a2244b3ecab9f22f3415, type: 3}

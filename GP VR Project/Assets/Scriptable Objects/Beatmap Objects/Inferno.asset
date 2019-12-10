@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: Inferno
   m_EditorClassIdentifier: 
-  folderName: Inferno
+  folderName: Inferno (TV Size) - 999645
   mapInfos:
   - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Easy]
     difficulty: 2
@@ -26,4 +26,4 @@ MonoBehaviour:
     difficulty: 8
   - mapName: Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Fire Force]
     difficulty: 8.5
-  audioFile: {fileID: 8300000, guid: 22fd2a8b339e3e548aa536b05ce3ad67, type: 3}
+  audioFile: {fileID: 8300000, guid: 7e317d613a2ad5e4c90212d7257e9e3b, type: 3}

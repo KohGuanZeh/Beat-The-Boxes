@@ -347,6 +347,12 @@
     <Reference Include="System.Drawing">
       <HintPath>C:/Users/KGZ/Desktop/DGDD/GP4/VR Assignment/Project File/Beat-The-Boxes/GP VR Project/Assets/Plugins/System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>C:/Users/KGZ/Desktop/DGDD/GP4/VR Assignment/Project File/Beat-The-Boxes/GP VR Project/Assets/Plugins/System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>C:/Users/KGZ/Desktop/DGDD/GP4/VR Assignment/Project File/Beat-The-Boxes/GP VR Project/Assets/Plugins/System.IO.Compression.FileSystem.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics.Vectors">
       <HintPath>C:/Users/KGZ/Desktop/DGDD/GP4/VR Assignment/Project File/Beat-The-Boxes/GP VR Project/Assets/Plugins/System.Numerics.Vectors.dll</HintPath>
     </Reference>

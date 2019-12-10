@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: Pride Kakumei
   m_EditorClassIdentifier: 
-  folderName: PrideKakumei
-  mapNames:
-  - CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Atsuro's Easy]
-  - CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Collab Normal]
-  - CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Milan-'s Hard]
-  - CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Insane]
-  - CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Darkness]
-  audioFile: {fileID: 8300000, guid: 066342cdbb203184dabb2824ef695116, type: 3}
+  folderName: Pride Kakumei - 342242
+  mapInfos:
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Atsuro's Easy]
+    difficulty: 2
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Collab Normal]
+    difficulty: 4
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Milan-'s Hard]
+    difficulty: 6
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Insane]
+    difficulty: 8
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Darkness]
+    difficulty: 8.7
+  audioFile: {fileID: 8300000, guid: d323a8d61afad3945b921bd4ec8c2474, type: 3}

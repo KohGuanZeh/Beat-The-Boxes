@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
+  m_Name: L.L.L
+  m_EditorClassIdentifier: 
+  folderName: L.L.L. - 334466
+  mapInfos:
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Trust's Easy]
+    difficulty: 2
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Normal]
+    difficulty: 3.8
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Hard]
+    difficulty: 5.5
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Raose's Hard]
+    difficulty: 6.5
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Tt's Insane]
+    difficulty: 7.5
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Irre's Insane]
+    difficulty: 8
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Nyquill's minimal pp]
+    difficulty: 8
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [captin's Extra]
+    difficulty: 8.5
+  - mapName: MYTH & ROID - L.L.L. (jonathanlfj) [Overkill]
+    difficulty: 9
+  audioFile: {fileID: 8300000, guid: 0fa03f4e85749744a93c653e0026bf5d, type: 3}

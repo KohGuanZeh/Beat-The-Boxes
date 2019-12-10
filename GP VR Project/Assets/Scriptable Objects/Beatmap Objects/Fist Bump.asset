@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: Fist Bump
   m_EditorClassIdentifier: 
-  folderName: FistBump
-  mapNames:
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Ascendance's Ultimate]
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Cup]
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Overdose]
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Platter]
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Rain]
-  - Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Salad]
-  audioFile: {fileID: 8300000, guid: de48c987f08bd2e48be163da18e549c3, type: 3}
+  folderName: Fist Bump - 779577
+  mapInfos:
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Cup]
+    difficulty: 6
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Salad]
+    difficulty: 7
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Platter]
+    difficulty: 8
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Rain]
+    difficulty: 9
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Overdose]
+    difficulty: 9.3
+  - mapName: Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Ascendance's Ultimate]
+    difficulty: 9.6
+  audioFile: {fileID: 8300000, guid: 961165e91cb62714f9e2fe2feaef69b6, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: As You Like It
   m_EditorClassIdentifier: 
-  folderName: AsYouLikeIt
+  folderName: As You Like It - 841277
   mapInfos:
   - mapName: Eve - As You Like It (Anishina Kodoku) [Hard]
     difficulty: 6.5
@@ -20,4 +20,4 @@ MonoBehaviour:
     difficulty: 7
   - mapName: Eve - As You Like It (Anishina Kodoku) [Honne]
     difficulty: 8
-  audioFile: {fileID: 8300000, guid: e8e8125b77558704ab61c5f668cb5390, type: 3}
+  audioFile: {fileID: 8300000, guid: c7a05cf36a054cc429c7438d9e9c1fd8, type: 3}

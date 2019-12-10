@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: Adamas
   m_EditorClassIdentifier: 
-  folderName: Adamas
+  folderName: ADAMAS (TV Size) - 859608
   mapInfos:
   - mapName: LiSA - ADAMAS (TV Size) (Doormat) [Easy]
     difficulty: 3
@@ -48,4 +48,4 @@ MonoBehaviour:
     difficulty: 8.8
   - mapName: LiSA - ADAMAS (TV Size) (Doormat) [Fragrant Olive]
     difficulty: 9
-  audioFile: {fileID: 8300000, guid: b389d0e6db3a38845b856de2605a93b3, type: 3}
+  audioFile: {fileID: 8300000, guid: 7cb1fc54778cb9a49829686268ec458e, type: 3}

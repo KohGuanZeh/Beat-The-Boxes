@@ -27,8 +27,8 @@ public class LambdaExpressionExample
 }
 #endregion
 
-//Developed by Koh Guan Zeh
-//Last Updated 30 Nov 2019
+//Script is Developed by Koh Guan Zeh
+//Last Updated: 2 Dec 2019
 namespace XellExtraUtils
 {
 	public static class MathFunctions
@@ -263,6 +263,16 @@ namespace XellExtraUtils
 		{
 			//HDRP uses _EmissiveColor and is also Color * Intensity (Luminance)
 			foreach (Material mat in mats) mat.SetColor(emissionProperty, color * intensity);
+		}
+	}
+
+	public static class ColorUtils
+	{
+		//Mainly used for Image.Color
+		public static Color ChangeAlpha(this Color color, float alpha = 1)
+		{
+			color.a = alpha;
+			return color;
 		}
 	}
 }

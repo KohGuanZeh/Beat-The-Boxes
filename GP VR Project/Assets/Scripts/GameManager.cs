@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 using UnityEngine;
 
@@ -8,9 +9,13 @@ using OsuParsers.Beatmaps.Objects;
 using OsuParsers.Beatmaps.Sections;
 using OsuParsers.Decoders;
 
+public enum GameState {Menu, Loading, OnPlay, Paused, Ended};
+
 public class GameManager : MonoBehaviour
 {
 	[Header("General Components")]
+	public static GameManager inst;
+	[SerializeField] ObjectPooling objPooler;
 	[SerializeField] AudioSource songPlayer;
 	[SerializeField] const string beatMapFolder = @"/Resources/Beatmaps/";
 
@@ -27,7 +32,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] double trackStartTime;
 
 	[Header("For Beat Instantiation")]
-	[Range(10, 30)] public float scrollSpeed;
+	[Range(10, 50)] public float scrollSpeed;
 	[SerializeField] float bufferTime; //Number of Seconds 
 	[SerializeField] float startTimeOffset; //Number of Seconds before the Song Plays
 	[SerializeField] Beat[] beatPrefabs; //Colors are indicated in Beat.cs
@@ -43,17 +48,34 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int score;
 	[SerializeField] int combo;
 
+	[Header("For Boxing")]
+	[SerializeField] Renderer leftGloveR; 
+	[SerializeField] Renderer rightGloveR;
+	public BoxColor[] gloveColor; //0 Left, 1 Right
+	public Material[] mats; //Follow Box Color Index
+
+	[Header("For Menus")]
+	public GameState gameState;
+
 	[Header("For Developers Use")]
 	public bool autoMode;
+	public bool generateSliderBeats;
 	public bool showStartDebug;
 	public bool spawnOnlyOneBeat;
 	public List<string> sliderInfo;
 
+	private void Awake()
+	{
+		inst = this;
+		beats = new List<HitObject>();
+	}
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		objPooler = ObjectPooling.inst;
 		songPlayer = GetComponent<AudioSource>();
-		InitialiseBeatMap(selectedMap, mapIndex);
+		//InitialiseBeatMap(selectedMap, mapIndex);
 
 		if (showStartDebug)
 		{
@@ -84,14 +106,56 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (beats.Count > 0)
+		if (gameState == GameState.OnPlay)
 		{
-			if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
+			if (beats.Count > 0)
+			{
+				if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
+			}
+
+			if (Input.GetKeyDown(KeyCode.X)) ChangeGloveColor(true);
+			if (Input.GetKeyDown(KeyCode.N)) ChangeGloveColor(false);
+
+			//if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
 		}
 
-		if (Input.GetKeyDown(KeyCode.Alpha0)) InitialiseBeatMap(selectedMap, mapIndex);
+		//For Pause
+		if (Input.GetKeyDown(KeyCode.Escape)) PausePlayGame();
 
-		//if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
+		//Acts as a Retry Button
+		if (Input.GetKeyDown(KeyCode.Alpha0)) Retry();
+	}
+
+	void ChangeGloveColor(bool isLeft)
+	{
+		if (isLeft)
+		{
+			switch (gloveColor[0])
+			{
+				case BoxColor.Red:
+					gloveColor[0] = BoxColor.Yellow;
+					leftGloveR.material = mats[3];
+					break;
+				case BoxColor.Yellow:
+					gloveColor[0] = BoxColor.Red;
+					leftGloveR.material = mats[0];
+					break;
+			}
+		}
+		else
+		{
+			switch (gloveColor[1])
+			{
+				case BoxColor.Blue:
+					gloveColor[1] = BoxColor.Green;
+					rightGloveR.material = mats[2];
+					break;
+				case BoxColor.Green:
+					gloveColor[1] = BoxColor.Blue;
+					rightGloveR.material = mats[1];
+					break;
+			}
+		}
 	}
 
 	#region Beat Map Initialisation
@@ -123,6 +187,8 @@ public class GameManager : MonoBehaviour
 
 		trackStartTime = AudioSettings.dspTime + startTimeOffset;
 		songPlayer.PlayScheduled(trackStartTime);
+
+		gameState = GameState.OnPlay;
 	}
 	#endregion
 
@@ -139,16 +205,16 @@ public class GameManager : MonoBehaviour
 		//Check if Beat is a Slider
 		double beatLength = beats[0].EndTime - beats[0].StartTime; //Get Total Time Span of Beat 
 
-		if (beatLength > 0) //If it Qualifies as a Slider
+		if (beatLength > 0 && generateSliderBeats) //If it Qualifies as a Slider
 		{
 			int beatsToSpawn = Mathf.FloorToInt((float)(beatLength/(sliderThreshold * 1000))); //Check how many beats to spawn
-			print(string.Format("Function Calculates such that it is to spawn {0} Additional Beats. Beat Length is {1}, Slider Threshold is {2}", beatsToSpawn, beatLength, sliderThreshold * 1000));
+			//print(string.Format("Function Calculates such that it is to spawn {0} Additional Beats. Beat Length is {1}, Slider Threshold is {2}", beatsToSpawn, beatLength, sliderThreshold * 1000));
 			double beatInterval = beatsToSpawn == 0 ? 0 : beatLength / beatsToSpawn;
-			print("Beat Interval is " + beatInterval);
+			//print("Beat Interval is " + beatInterval);
 
 			for (int i = 0; i <= beatsToSpawn; i++)
 			{
-				Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+				Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity).GetComponent<Beat>(); //Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
 
 				beat.AssignGM(this);
 				double additionalOffset = beatInterval * i;
@@ -159,7 +225,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+			Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity).GetComponent<Beat>();
 
 			beat.AssignGM(this);
 			beat.InitialiseBeat(GetTrackTime(), beats[0].StartTime, beatSpawnPos.position, spawnHitDist);
@@ -170,6 +236,23 @@ public class GameManager : MonoBehaviour
 		beats.RemoveAt(0);
 
 		if (spawnOnlyOneBeat) beats.Clear();
+	}
+
+	string GetPoolTag(int colorIndex)
+	{
+		switch (colorIndex)
+		{
+			case 0:
+				return "Red";
+			case 1:
+				return "Blue";
+			case 2:
+				return "Green";
+			case 3:
+				return "Yellow";
+			default:
+				return "None";
+		}
 	}
 
 	//When the Song has ended, a Figure should run towards the Player. 
@@ -215,6 +298,44 @@ public class GameManager : MonoBehaviour
 
 	public void BreakCombo()
 	{
+		combo = 0;
+	}
+	#endregion
+
+	#region For Menus
+	public void PausePlayGame()
+	{
+		switch (gameState)
+		{
+			case GameState.OnPlay:
+				gameState = GameState.Paused;
+				Time.timeScale = 0;
+				AudioListener.pause = true;
+				break;
+			case GameState.Paused:
+				gameState = GameState.OnPlay;
+				Time.timeScale = 1;
+				AudioListener.pause = false;
+				break;
+		}
+	}
+
+	public void Retry()
+	{
+		//Check if the Game State is Paused
+		if (gameState == GameState.Paused)
+		{
+			Time.timeScale = 1;
+			AudioListener.pause = false;
+		}
+
+		//Find a Better Way to Find Objects Of Type
+		foreach (Beat beat in FindObjectsOfType<Beat>()) objPooler.ReturnToPool(beat.gameObject, beat.GetPoolTag());
+		gameState = GameState.Loading;
+
+		songPlayer.Stop();
+		InitialiseBeatMap(selectedMap, mapIndex);
+		score = 0;
 		combo = 0;
 	}
 	#endregion

@@ -24,7 +24,13 @@ public class BeatmapObjectGUI : Editor
 		mapObj = (BeatmapObject)target;
 
 		GUILayout.Space(10);
-		if (GUILayout.Button("Initialise Beatmap Object")) InitialiseBeatmapObject();
+		if (GUILayout.Button("Initialise Beatmap Object"))
+		{
+			InitialiseBeatmapObject();
+			EditorUtility.SetDirty(mapObj);
+			AssetDatabase.SaveAssets();
+			//Hello
+		} 
 		//if (GUILayout.Button("Arrange Map Names By Difficulty")) ArrangeBeatMapViaDifficulty();
 	}
 
@@ -40,12 +46,26 @@ public class BeatmapObjectGUI : Editor
 
 	public void ArrangeBeatMapViaDifficulty()
 	{
+		bool audioFileFound = false;
+
 		//Get Maps Difficulty First
 		for (int i = 0; i < mapObj.mapInfos.Length; i++)
 		{
 			string mapPath = GetMapPath(mapObj.folderName, mapObj.mapInfos[i].mapName);
 			Beatmap beatmap = BeatmapDecoder.Decode(mapPath);
 			mapObj.mapInfos[i].difficulty = beatmap.DifficultySection.OverallDifficulty;
+
+			//Only initialised Once
+			if (!audioFileFound)
+			{
+				string audioName = beatmap.GeneralSection.AudioFilename;
+				List<string> audioNameSplit = audioName.Split('.').ToList();
+				audioNameSplit.RemoveAt(audioNameSplit.Count - 1); //Remove the last index
+				audioName = string.Join(".", audioNameSplit);
+
+				mapObj.audioFile = Resources.Load<AudioClip>(string.Format("Beatmaps/{0}/{1}", mapObj.folderName, audioName));
+				audioFileFound = true;
+			}
 		}
 
 		System.Array.Sort(mapObj.mapInfos, (x, y) => x.difficulty.CompareTo(y.difficulty));

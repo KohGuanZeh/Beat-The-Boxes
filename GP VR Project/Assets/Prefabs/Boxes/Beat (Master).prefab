@@ -141,6 +141,7 @@ MonoBehaviour:
   startXDisplaceVal: 1.5
   finalXDisplaceVal: 0.5
   beatMeshObj: {fileID: 0}
+  isLeftBeat: 0
   boxType: 0
   boxColor: 0
   minRot: 120

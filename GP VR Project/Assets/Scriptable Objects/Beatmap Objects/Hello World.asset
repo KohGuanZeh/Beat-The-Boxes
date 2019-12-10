@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
   m_Name: Hello World
   m_EditorClassIdentifier: 
-  folderName: HelloWorld
+  folderName: Hello,world! - 302799
   mapInfos:
   - mapName: BUMP OF CHICKEN - Hello,world! (tutuhaha) [Easy]
     difficulty: 2
@@ -26,4 +26,4 @@ MonoBehaviour:
     difficulty: 7
   - mapName: BUMP OF CHICKEN - Hello,world! (tutuhaha) [Extra]
     difficulty: 8
-  audioFile: {fileID: 8300000, guid: ef22f1284bb46cb46b3d7aeefc7c7664, type: 3}
+  audioFile: {fileID: 8300000, guid: da314ffd68ba7e446926c33c388c35c6, type: 3}

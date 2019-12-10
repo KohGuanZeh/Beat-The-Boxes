@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe881b7627ef9d04db227be5783ab388, type: 3}
+  m_Name: Pride Kakumei TV Ver
+  m_EditorClassIdentifier: 
+  folderName: Pride Kakumei - 335534
+  mapInfos:
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Easy]
+    difficulty: 2
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Normal]
+    difficulty: 4
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Natsu's Hard]
+    difficulty: 6
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [iMage's Insane]
+    difficulty: 7
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Extra]
+    difficulty: 7.5
+  - mapName: CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Guy's Extra]
+    difficulty: 8
+  audioFile: {fileID: 8300000, guid: 93e30c71860e4dc438d8a6892b69e7ff, type: 3}
