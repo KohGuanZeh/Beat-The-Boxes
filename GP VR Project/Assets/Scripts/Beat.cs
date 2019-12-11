@@ -114,10 +114,10 @@ public class Beat : MonoBehaviour, IPooledObject
 		if (GetOffsetRatio() >= 1.0f) Hit();
 	}
 
-	public void Hit(bool destroy = true)
+	public void Hit(int score = 30, bool destroy = true)
 	{
 		//Play Sound Effect
-		gm.AddScore();
+		gm.AddScore(score);
 		if (destroy) ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
 	}
 
@@ -209,19 +209,19 @@ public class Beat : MonoBehaviour, IPooledObject
 
 			print(GetHitDirection(hitVel.normalized));
 
-			if (hitVel.sqrMagnitude < 25) return;
+			if (glove.gloveColor != boxColor || hitVel.sqrMagnitude < 25) return;
 
 			switch (boxType)
 			{
 				case BoxType.Normal:
-					gm.AddScore();
+					Hit();
 					break;
 				case BoxType.Slider:
-					gm.AddScore(5);
+					Hit(5);
 					break;
 				case BoxType.Directional:
 					//Check whether Direction is Correct
-					if (hitDir == GetHitDirection(hitVel.normalized)) gm.AddScore(); //Check Directional Input
+					if (hitDir == GetHitDirection(hitVel.normalized)) Hit(); //Check Directional Input
 					break;
 			}
 		}
