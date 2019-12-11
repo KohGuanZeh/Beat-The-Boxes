@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct BeatmapInfo
-{
-	[SerializeField] public string mapName;
-	[SerializeField] public float difficulty;
-}
-
 [CreateAssetMenu(fileName = "Beatmap Object", menuName = "ScriptableObjects/New Beatmap Object", order = 1)]
 public class BeatmapObject : ScriptableObject
 {

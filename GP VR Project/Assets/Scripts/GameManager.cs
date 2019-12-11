@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int combo;
 
 	[Header("For Boxing")]
-	[SerializeField] Renderer leftGloveR; 
-	[SerializeField] Renderer rightGloveR;
 	public BoxColor[] gloveColor; //0 Left, 1 Right
 	public Material[] mats; //Follow Box Color Index
 
@@ -75,7 +73,7 @@ public class GameManager : MonoBehaviour
 	{
 		objPooler = ObjectPooling.inst;
 		songPlayer = GetComponent<AudioSource>();
-		//InitialiseBeatMap(selectedMap, mapIndex);
+		InitialiseBeatMap(selectedMap, mapIndex);
 
 		if (showStartDebug)
 		{
@@ -113,9 +111,6 @@ public class GameManager : MonoBehaviour
 				if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
 			}
 
-			if (Input.GetKeyDown(KeyCode.X)) ChangeGloveColor(true);
-			if (Input.GetKeyDown(KeyCode.N)) ChangeGloveColor(false);
-
 			//if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
 		}
 
@@ -126,39 +121,12 @@ public class GameManager : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha0)) Retry();
 	}
 
-	void ChangeGloveColor(bool isLeft)
+	#region Beat Map Initialisation
+	public void TempPlay()
 	{
-		if (isLeft)
-		{
-			switch (gloveColor[0])
-			{
-				case BoxColor.Red:
-					gloveColor[0] = BoxColor.Yellow;
-					leftGloveR.material = mats[3];
-					break;
-				case BoxColor.Yellow:
-					gloveColor[0] = BoxColor.Red;
-					leftGloveR.material = mats[0];
-					break;
-			}
-		}
-		else
-		{
-			switch (gloveColor[1])
-			{
-				case BoxColor.Blue:
-					gloveColor[1] = BoxColor.Green;
-					rightGloveR.material = mats[2];
-					break;
-				case BoxColor.Green:
-					gloveColor[1] = BoxColor.Blue;
-					rightGloveR.material = mats[1];
-					break;
-			}
-		}
+		InitialiseBeatMap(selectedMap, mapIndex);
 	}
 
-	#region Beat Map Initialisation
 	public void InitialiseBeatMap(BeatmapObject selectedMap, int mapIndex)
 	{
 		this.selectedMap = selectedMap;
@@ -214,7 +182,7 @@ public class GameManager : MonoBehaviour
 
 			for (int i = 0; i <= beatsToSpawn; i++)
 			{
-				Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity).GetComponent<Beat>(); //Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+				Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity, beatSpawnPos).GetComponent<Beat>(); //Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
 
 				beat.AssignGM(this);
 				double additionalOffset = beatInterval * i;

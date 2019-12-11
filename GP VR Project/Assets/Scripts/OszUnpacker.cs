@@ -16,11 +16,10 @@ public class OszUnpacker : MonoBehaviour
 	[Header("Developer Options")]
 	[SerializeField] bool initialiseBmos;
 
-	[Header("BMOs and BMDs")]
+	[Header("Beatmap Data")]
 	[SerializeField] const string osuDumpPath = @"/Resources/Beatmaps/";
 	[SerializeField] const string bmObjDirPath = @"/Scriptable Objects/Beatmap Objects/";
-	[SerializeField] List<BeatmapObject> bmos;
-	[SerializeField] List<BeatmapData> bmds;
+	public static List<BeatmapData> bmds; //For Other Classes to Access this BMD
 
 	[Header("For Osz Unpacking")]
 	[SerializeField] DirectoryInfo streamingAssetsDirInfo;
@@ -31,9 +30,9 @@ public class OszUnpacker : MonoBehaviour
 	public VoidDelegate OnUnpackedEnded;*/
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
     {
-		BeatmapManager.beatmaps = BeatmapManager.LoadBeatmapData();
+		bmds = LoadBeatmapData();
 
 		tempPath = Application.dataPath + osuDumpPath + "Temp/";
 		if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath); //Ensure that the Temp Directory Exist to dump files
@@ -62,17 +61,35 @@ public class OszUnpacker : MonoBehaviour
 		unpackingInProgress = false;
 		print("Unpacking Completed");
 
-		BeatmapManager.SaveBeatmapData();
-		bmds = BeatmapManager.beatmaps;
-
-		//if (OnUnpackedEnded != null) OnUnpackedEnded();
+		SaveBeatmapData(bmds);
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	#region For Saving and Loading Beatmap Data
+	public static List<BeatmapData> LoadBeatmapData()
+	{
+		string jsonPath = string.Format("{0}/{1}/{2}", Application.dataPath, "Beatmaps", "MapData.txt");
 
-    }
+		if (File.Exists(jsonPath))
+		{
+			string json = File.ReadAllText(jsonPath);
+			BeatmapDataWrapper bmWrapper = JsonUtility.FromJson<BeatmapDataWrapper>(json);
+			foreach (BeatmapData bmd in bmWrapper.beatmaps) bmd.LoadAssets();
+			return bmWrapper.beatmaps;
+		}
+		else return new List<BeatmapData>();
+	}
+
+	public static void SaveBeatmapData(List<BeatmapData> beatmaps)
+	{
+		string jsonPath = string.Format("{0}/{1}/{2}", Application.dataPath, "Beatmaps", "MapData.txt");
+
+		beatmaps.Sort((x, y) => x.folderName.CompareTo(y.folderName));
+		BeatmapDataWrapper bmWrapper = new BeatmapDataWrapper(beatmaps); //Create a Temp Wrapper so it can be stored as Json
+
+		string json = JsonUtility.ToJson(bmWrapper, true);
+		File.WriteAllText(jsonPath, json);
+	}
+	#endregion
 
 	void UnpackOszFile(FileInfo oszFile)
 	{
@@ -102,7 +119,7 @@ public class OszUnpacker : MonoBehaviour
 				dumpPath = string.Format("{0}{1}{2}/", Application.dataPath, osuDumpPath, folderName); //Set Path to Dump ONLY the required resources for this Game
 
 				//Check if the a BMD has been Created for the Osz Before
-				bmd = BeatmapManager.beatmaps.FirstOrDefault(x => x.folderName == folderName);
+				bmd = bmds.FirstOrDefault(x => x.folderName == folderName);
 
 				if (bmd == null) bmd = new BeatmapData(); //bmdExists remains false
 				else bmdExists = true;
@@ -149,7 +166,7 @@ public class OszUnpacker : MonoBehaviour
 		}
 
 		bmd.mapInfos.Sort((x, y) => x.difficulty.CompareTo(y.difficulty));
-		if (!bmdExists) BeatmapManager.beatmaps.Add(bmd);
+		if (!bmdExists) bmds.Add(bmd);
 
 		/*DirectoryInfo dir = new DirectoryInfo(tempPath);
 		foreach (FileInfo file in dir.GetFiles()) File.Delete(file.FullName);*/
@@ -158,6 +175,7 @@ public class OszUnpacker : MonoBehaviour
 		File.Delete(oszFile.FullName);
 	}
 
+	#region For Getting File Infos and File Names
 	FileInfo[] GetNewOszFiles()
 	{
 		return streamingAssetsDirInfo.GetFiles("*.osz");
@@ -193,4 +211,5 @@ public class OszUnpacker : MonoBehaviour
 
 		return matchedFiles;
 	}
+	#endregion
 }

@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Beat.cs" />
     <Compile Include="Assets\Scripts\BeatmapData.cs" />
-    <Compile Include="Assets\Scripts\BeatmapManager.cs" />
+    <Compile Include="Assets\Scripts\BeatmapUIObj.cs" />
     <Compile Include="Assets\Scripts\ExtraUtilities.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Glove.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\OszUnpacker.cs" />
     <Compile Include="Assets\Scripts\Particles.cs" />
     <Compile Include="Assets\Scripts\Scriptable Objects\BeatmapObject.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

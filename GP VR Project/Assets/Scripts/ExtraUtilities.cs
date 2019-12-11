@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #region Example Scripts
 public class LambdaExpressionExample
@@ -273,6 +274,72 @@ namespace XellExtraUtils
 		{
 			color.a = alpha;
 			return color;
+		}
+	}
+
+	//Developed with the help of Shawnblais and Freezy. https://forum.unity.com/threads/code-snippet-size-rawimage-to-parent-keep-aspect-ratio.381616/
+	public static class CanvasExtensions
+	{
+		public static Vector2 SizeToParent(this RawImage img, float padding = 0)
+		{
+			float w = 0, h = 0;
+			RectTransform parent = img.transform.parent.GetComponent<RectTransform>();
+			RectTransform imgRect = img.GetComponent<RectTransform>();
+
+			if (img.texture != null)
+			{
+				if (!parent) return imgRect.sizeDelta; //If Rect does not have a Parent, use Current Settings
+				padding = 1 - padding;
+				float ratio = img.texture.width / (float)img.texture.height;
+				Rect bounds = new Rect(0, 0, parent.rect.width, parent.rect.height);
+
+				//Invert the bounds if the image is rotated
+				if (Mathf.RoundToInt(imgRect.eulerAngles.z) % 180 == 90) bounds.size = new Vector2(bounds.height, bounds.width);
+
+				//Size by height first
+				h = bounds.height * padding;
+				w = h * ratio;
+				if (w > bounds.width * padding)
+				{ 
+					//If it doesn't fit, fallback to width;
+					w = bounds.width * padding;
+					h = w / ratio;
+				}
+			}
+			imgRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, w);
+			imgRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
+			return imgRect.sizeDelta;
+		}
+
+		public static Vector2 SizeToFillParent(this RawImage img)
+		{
+			float w = 0, h = 0;
+			RectTransform parent = img.transform.parent.GetComponent<RectTransform>();
+			RectTransform imgRect = img.GetComponent<RectTransform>();
+
+			if (img.texture != null)
+			{
+				if (!parent) return imgRect.sizeDelta; //If Rect does not have a Parent, use Current Settings
+				float ratio = img.texture.width / (float)img.texture.height;
+				Rect bounds = new Rect(0, 0, parent.rect.width, parent.rect.height);
+
+				//Invert the bounds if the image is rotated
+				if (Mathf.RoundToInt(imgRect.eulerAngles.z) % 180 == 90) bounds.size = new Vector2(bounds.height, bounds.width);
+
+				//Size by height first
+				h = bounds.height;
+				w = h * ratio;
+
+				if (w < bounds.width)
+				{
+					w = bounds.width;
+					h = w / ratio;
+				}
+			}
+
+			imgRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, w);
+			imgRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
+			return imgRect.sizeDelta;
 		}
 	}
 }

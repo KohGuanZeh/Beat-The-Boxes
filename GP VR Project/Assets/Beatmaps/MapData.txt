@@ -5,427 +5,632 @@
             "mapInfos": [
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Easy]",
-                    "difficulty": 3.0
+                    "difficulty": 3.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Easy]",
-                    "difficulty": 3.0
+                    "difficulty": 3.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Easy]",
-                    "difficulty": 3.0
+                    "difficulty": 3.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Normal]",
-                    "difficulty": 4.5
+                    "difficulty": 4.5,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Normal]",
-                    "difficulty": 4.5
+                    "difficulty": 4.5,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Normal]",
-                    "difficulty": 4.5
+                    "difficulty": 4.5,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kyle73's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [StarR's Expert]",
-                    "difficulty": 8.5
+                    "difficulty": 8.5,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Night Sky]",
-                    "difficulty": 8.699999809265137
+                    "difficulty": 8.699999809265137,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Blue Rose]",
-                    "difficulty": 8.800000190734864
+                    "difficulty": 8.800000190734864,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Fragrant Olive]",
-                    "difficulty": 9.0
+                    "difficulty": 9.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/audio",
-            "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice"
+            "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice",
+            "audio": {
+                "instanceID": 18502
+            },
+            "mainSplash": {
+                "instanceID": 20056
+            }
         },
         {
             "folderName": "Anoko Secret - 855906",
             "mapInfos": [
                 {
                     "mapName": "Eve - Anoko Secret (Nevo) [Agatsu's Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Eve - Anoko Secret (Nevo) [hyper's Hard]",
-                    "difficulty": 6.5
+                    "difficulty": 6.5,
+                    "scores": []
                 },
                 {
                     "mapName": "Eve - Anoko Secret (Nevo) [Kuma]",
-                    "difficulty": 8.399999618530274
+                    "difficulty": 8.399999618530274,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Anoko Secret - 855906/audio",
-            "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal"
+            "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal",
+            "audio": {
+                "instanceID": 24092
+            },
+            "mainSplash": {
+                "instanceID": 25010
+            }
         },
         {
             "folderName": "As You Like It - 841277",
             "mapInfos": [
                 {
                     "mapName": "Eve - As You Like It (Anishina Kodoku) [Hard]",
-                    "difficulty": 6.5
+                    "difficulty": 6.5,
+                    "scores": []
                 },
                 {
                     "mapName": "Eve - As You Like It (Anishina Kodoku) [619's Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Eve - As You Like It (Anishina Kodoku) [Honne]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/As You Like It - 841277/audio",
-            "imgFilePath": "Beatmaps/As You Like It - 841277/evew"
+            "imgFilePath": "Beatmaps/As You Like It - 841277/evew",
+            "audio": {
+                "instanceID": 18234
+            },
+            "mainSplash": {
+                "instanceID": 20312
+            }
         },
         {
             "folderName": "Catch the Moment - 572897",
             "mapInfos": [
                 {
                     "mapName": "LiSA - Catch the Moment (Delis) [Satellite's Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - Catch the Moment (Delis) [Normal]",
-                    "difficulty": 5.0
+                    "difficulty": 5.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - Catch the Moment (Delis) [Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - Catch the Moment (Delis) [Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "LiSA - Catch the Moment (Delis) [Extra]",
-                    "difficulty": 9.0
+                    "difficulty": 9.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Catch the Moment - 572897/audio",
-            "imgFilePath": "Beatmaps/Catch the Moment - 572897/BG"
+            "imgFilePath": "Beatmaps/Catch the Moment - 572897/BG",
+            "audio": {
+                "instanceID": 16242
+            },
+            "mainSplash": {
+                "instanceID": 25310
+            }
         },
         {
             "folderName": "Fist Bump - 779577",
             "mapInfos": [
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Cup]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Salad]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Platter]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Rain]",
-                    "difficulty": 9.0
+                    "difficulty": 9.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Overdose]",
-                    "difficulty": 9.300000190734864
+                    "difficulty": 9.300000190734864,
+                    "scores": []
                 },
                 {
                     "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Ascendance's Ultimate]",
-                    "difficulty": 9.600000381469727
+                    "difficulty": 9.600000381469727,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Fist Bump - 779577/audio",
-            "imgFilePath": "Beatmaps/Fist Bump - 779577/BG"
+            "imgFilePath": "Beatmaps/Fist Bump - 779577/BG",
+            "audio": {
+                "instanceID": 22900
+            },
+            "mainSplash": {
+                "instanceID": 21076
+            }
+        },
+        {
+            "folderName": "Future Coaster - 1056866",
+            "mapInfos": [
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Kantan]",
+                    "difficulty": 3.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Futsuu]",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Muzukashii]",
+                    "difficulty": 5.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Oni]",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Inner Oni]",
+                    "difficulty": 6.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Future]",
+                    "difficulty": 7.0,
+                    "scores": []
+                }
+            ],
+            "audioFilePath": "Beatmaps/Future Coaster - 1056866/audio",
+            "imgFilePath": "Beatmaps/Future Coaster - 1056866/thanks nifty",
+            "audio": {
+                "instanceID": 31900
+            },
+            "mainSplash": {
+                "instanceID": 31910
+            }
         },
         {
             "folderName": "Harumodoki (TV Size) - 545139",
             "mapInfos": [
                 {
                     "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Hard]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/audio",
-            "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage"
+            "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage",
+            "audio": {
+                "instanceID": 21784
+            },
+            "mainSplash": {
+                "instanceID": 23138
+            }
         },
         {
             "folderName": "Hello,world! - 302799",
             "mapInfos": [
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Hard]",
-                    "difficulty": 5.0
+                    "difficulty": 5.0,
+                    "scores": []
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Habi's Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Extra]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Hello,world! - 302799/Hello,world!",
-            "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5"
+            "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5",
+            "audio": {
+                "instanceID": 26274
+            },
+            "mainSplash": {
+                "instanceID": 20318
+            }
         },
         {
             "folderName": "in the Garden - 492525",
             "mapInfos": [
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Yuii-'s Normal]",
-                    "difficulty": 3.5
+                    "difficulty": 3.5,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [pkhg's Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Ufw's Advanced]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Garven's Hard]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Jonimay's Extra]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [Vincent's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Primary - in the Garden (MrSergio) [flowerBed]",
-                    "difficulty": 9.0
+                    "difficulty": 9.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/in the Garden - 492525/audio",
-            "imgFilePath": "Beatmaps/in the Garden - 492525/flowers"
+            "imgFilePath": "Beatmaps/in the Garden - 492525/flowers",
+            "audio": {
+                "instanceID": 20128
+            },
+            "mainSplash": {
+                "instanceID": 22056
+            }
         },
         {
             "folderName": "Inferno (TV Size) - 999645",
             "mapInfos": [
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Insane]",
-                    "difficulty": 7.5
+                    "difficulty": 7.5,
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Monstrata's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Fire Force]",
-                    "difficulty": 8.5
+                    "difficulty": 8.5,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Inferno (TV Size) - 999645/te",
-            "imgFilePath": "Beatmaps/Inferno (TV Size) - 999645/720685"
+            "imgFilePath": "Beatmaps/Inferno (TV Size) - 999645/720685",
+            "audio": {
+                "instanceID": 16396
+            },
+            "mainSplash": {
+                "instanceID": 24712
+            }
         },
         {
             "folderName": "L.L.L. - 334466",
             "mapInfos": [
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Trust's Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Normal]",
-                    "difficulty": 3.799999952316284
+                    "difficulty": 3.799999952316284,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Hard]",
-                    "difficulty": 5.5
+                    "difficulty": 5.5,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Raose's Hard]",
-                    "difficulty": 6.5
+                    "difficulty": 6.5,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Tt's Insane]",
-                    "difficulty": 7.5
+                    "difficulty": 7.5,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Irre's Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Nyquill's minimal pp]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [captin's Extra]",
-                    "difficulty": 8.5
+                    "difficulty": 8.5,
+                    "scores": []
                 },
                 {
                     "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Overkill]",
-                    "difficulty": 9.0
+                    "difficulty": 9.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/L.L.L. - 334466/lol",
-            "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0"
+            "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0",
+            "audio": {
+                "instanceID": 26524
+            },
+            "mainSplash": {
+                "instanceID": 23196
+            }
         },
         {
             "folderName": "Pride Kakumei - 335534",
             "mapInfos": [
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Natsu's Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [iMage's Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Extra]",
-                    "difficulty": 7.5
+                    "difficulty": 7.5,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Guy's Extra]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Pride Kakumei - 335534/Pride Revolution",
-            "imgFilePath": "Beatmaps/Pride Kakumei - 335534/BG+Aerous+Coke"
+            "imgFilePath": "Beatmaps/Pride Kakumei - 335534/BG+Aerous+Coke",
+            "audio": {
+                "instanceID": 16424
+            },
+            "mainSplash": {
+                "instanceID": 24734
+            }
         },
         {
             "folderName": "Pride Kakumei - 342242",
             "mapInfos": [
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Atsuro's Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Collab Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Milan-'s Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Insane]",
-                    "difficulty": 8.0
+                    "difficulty": 8.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Darkness]",
-                    "difficulty": 8.699999809265137
+                    "difficulty": 8.699999809265137,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Pride Kakumei - 342242/01. ",
-            "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei"
+            "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei",
+            "audio": {
+                "instanceID": 20302
+            },
+            "mainSplash": {
+                "instanceID": 21488
+            }
         },
         {
             "folderName": "Wolf - 514507",
             "mapInfos": [
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Easy]",
-                    "difficulty": 2.0
+                    "difficulty": 2.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Normal]",
-                    "difficulty": 4.0
+                    "difficulty": 4.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Hard]",
-                    "difficulty": 6.0
+                    "difficulty": 6.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [pkhg's Insane]",
-                    "difficulty": 7.0
+                    "difficulty": 7.0,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Janpai's Insane]",
-                    "difficulty": 7.5
+                    "difficulty": 7.5,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Sotarks' Expert]",
-                    "difficulty": 8.199999809265137
+                    "difficulty": 8.199999809265137,
+                    "scores": []
                 },
                 {
                     "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Kanto's Memories]",
-                    "difficulty": 8.5
+                    "difficulty": 8.5,
+                    "scores": []
                 }
             ],
             "audioFilePath": "Beatmaps/Wolf - 514507/audio",
-            "imgFilePath": "Beatmaps/Wolf - 514507/massugu"
+            "imgFilePath": "Beatmaps/Wolf - 514507/massugu",
+            "audio": {
+                "instanceID": 24588
+            },
+            "mainSplash": {
+                "instanceID": 23254
+            }
         }
     ]
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 using XellExtraUtils;
 
+public enum Direction {None, Up, Down, Left, Right, Forward, Backward }
+
 public enum BoxColor {None, Red, Blue, Green, Yellow }
 
-public enum BoxType {Normal, Iron, Large } //Normal is Small Beats, Big requires Continuous Punch, Iron requires Dodging
+public enum BoxType {Normal, Slider, Directional } //Normal is Small Beats, Big requires Continuous Punch, Iron requires Dodging
 
 public class Beat : MonoBehaviour, IPooledObject
 {
@@ -18,11 +20,11 @@ public class Beat : MonoBehaviour, IPooledObject
 	[SerializeField] float startXDisplaceVal = 0.5f;
 	[SerializeField] float finalXDisplaceVal = 0.15f;
 	[SerializeField] Transform beatMeshObj;
-	[SerializeField] bool endViaHit;
 
 	[Header("Beat Attributes")]
 	public BoxType boxType;
 	public BoxColor boxColor;
+	public Direction hitDir;
 
 	[Header("Beat Rotation")]
 	[SerializeField] float minRot;
@@ -85,8 +87,6 @@ public class Beat : MonoBehaviour, IPooledObject
 								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot),
 								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot));
 
-		endViaHit = false;
-
 		print(string.Format("Beat initialised. Transform is: {0}. Target Time is: {1}. Spawned Time is: {2}. Spawn Position is: {3} Box Color is: {4}", transform.position.z, this.targetTime, this.spawnedTime, this.spawnPos, boxColor));
 	}
 
@@ -111,29 +111,33 @@ public class Beat : MonoBehaviour, IPooledObject
 	#region For Beat Hit
 	public void AutoHitBeat()
 	{
-		if (GetOffsetRatio() >= 1.0f)
-		{
-			switch (boxType)
-			{
-				case BoxType.Normal:
-					Hit();
-					break;
-				case BoxType.Large:
-					if (GetOffsetRatio() >= 1.0f) Hit(false);
-					break;
-			}
-		}
+		if (GetOffsetRatio() >= 1.0f) Hit();
 	}
 
 	public void Hit(bool destroy = true)
 	{
 		//Play Sound Effect
 		gm.AddScore();
-		endViaHit = true;
-		//ObjectPooling.inst.SpawnFromPool("Particles", transform.position, Quaternion.identity);
-		//float zOffset = Mathf.LerpUnclamped(0, spawnHitDist, GetOffsetRatio());
-		//print(string.Format("Offset is: {0}, Transform is: {1}. HitCount is {2}. Target Time is: {3}. Spawned Time is: {4}. Spawn Position is: {5} Box Color is: {6}", zOffset, transform.position.z, ++hitCount, targetTime, spawnedTime, spawnPos, boxColor));
 		if (destroy) ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
+	}
+
+	public Direction GetHitDirection(Vector3 hitDir)
+	{
+		float x, y, z = 0;
+		bool xPos, yPos, zPos = false;
+
+		xPos = hitDir.x > 0;
+		yPos = hitDir.y > 0;
+		zPos = hitDir.z > 0;
+
+		x = Mathf.Abs(hitDir.x);
+		y = Mathf.Abs(hitDir.y);
+		z = Mathf.Abs(hitDir.z);
+
+		if (x > y && x > z) return xPos ? Direction.Right : Direction.Left;
+		else if (y > x && y > z) return yPos ? Direction.Up : Direction.Down;
+		else if (z > x && z > y) return zPos ? Direction.Forward : Direction.Backward;
+		else return Direction.None;
 	}
 	#endregion
 
@@ -174,7 +178,7 @@ public class Beat : MonoBehaviour, IPooledObject
 
 	public void OnObjectDespawn()
 	{
-		if (!endViaHit) print("Hmmmm");
+
 	}
 
 	public string GetPoolTag()
@@ -198,21 +202,32 @@ public class Beat : MonoBehaviour, IPooledObject
 	#region Trigger Functions
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Destroy Zone")
+		if (other.tag == "Player")
 		{
+			Glove glove = other.GetComponent<Glove>();
+			Vector3 hitVel = glove.GetControllerVelocity();
+
+			print(GetHitDirection(hitVel.normalized));
+
+			if (hitVel.sqrMagnitude < 25) return;
+
 			switch (boxType)
 			{
 				case BoxType.Normal:
-					gm.BreakCombo();
-					break;
-				case BoxType.Large:
-					gm.BreakCombo();
-					break;
-				case BoxType.Iron:
 					gm.AddScore();
 					break;
+				case BoxType.Slider:
+					gm.AddScore(5);
+					break;
+				case BoxType.Directional:
+					//Check whether Direction is Correct
+					if (hitDir == GetHitDirection(hitVel.normalized)) gm.AddScore(); //Check Directional Input
+					break;
 			}
-
+		}
+		else if (other.tag == "Destroy Zone")
+		{
+			gm.BreakCombo();
 			ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag());
 		}
 	}
