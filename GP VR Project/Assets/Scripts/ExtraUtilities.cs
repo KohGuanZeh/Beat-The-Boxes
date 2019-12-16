@@ -195,12 +195,12 @@ namespace XellExtraUtils
 			return mats;
 		}
 
-		public static void ChangeMaterialColor(Material mat, Color color, string colorProperty = "_BaseColor")
+		public static void ChangeMaterialColor(Material mat, Color color, string colorProperty = "_Color")
 		{
 			mat.SetColor(colorProperty, color);
 		}
 
-		public static void ChangeMaterialsColor(Material[] mats, Color color, string colorProperty = "_BaseColor")
+		public static void ChangeMaterialsColor(Material[] mats, Color color, string colorProperty = "_Color")
 		{
 			foreach (Material mat in mats) mat.SetColor(colorProperty, color);
 		}

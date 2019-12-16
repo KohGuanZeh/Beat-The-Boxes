@@ -19,9 +19,13 @@ public class GameManager : MonoBehaviour
 	[SerializeField] AudioSource songPlayer;
 	[SerializeField] const string beatMapFolder = @"/Resources/Beatmaps/";
 
-	[Header("Beatmap Info Via SO")]
+	[Header("Load Beatmap via SO")]
 	[SerializeField] BeatmapObject selectedMap;
 	[SerializeField] int mapIndex;
+
+	[Header("Load Beatmap via BMD and BMI")]
+	[SerializeField] BeatmapData bmd;
+	[SerializeField] BeatmapInfo bmi;
 
 	[Header("Beatmap Infos")]
 	[SerializeField] Beatmap beatmap;
@@ -31,26 +35,33 @@ public class GameManager : MonoBehaviour
 	[SerializeField] float trackDelayTime;
 	[SerializeField] double trackStartTime;
 
-	[Header("For Beat Instantiation")]
-	[Range(10, 50)] public float scrollSpeed;
-	[SerializeField] float bufferTime; //Number of Seconds 
+	[Header("Beat Instantiation (Timing)")]
+	[Range(10, 50)] public float scrollSpeed; //Controls how fast the Beats go towards the Player
+	[SerializeField] float bufferTime; //Number of Seconds it takes for the Beat to reach the Player. Used to Check when it should Spawn Beats
 	[SerializeField] float startTimeOffset; //Number of Seconds before the Song Plays
-	[SerializeField] Beat[] beatPrefabs; //Colors are indicated in Beat.cs
-	[SerializeField] int colorIndex;
+
+	[Header("Beat Instantiation (Transform Manipulation)")]
+	[SerializeField] Beat[] beatPrefabs; //Sorted by Box Type. 0 is Normal, 1 is Slider, 2 is Directional
+	[SerializeField] int colorIndex; //Know what Color of Beat to Spawn
 	[SerializeField] Transform beatSpawnPos, beatHitPos;
 	[SerializeField] float spawnHitDist;
-	[SerializeField] Transform beatsParent;
+
+	[Header("Beat Colors")]
+	//All of which are according to the Color Index. Red, Blue, Green, Yellow
+	public Color[] diffuseColors;
+	public Color[] emissiveColors;
+	public float[] emissiveIntensities;
 
 	[Header("For Slider Configuration")]
-	[Range(0.1f, 0.5f)] [SerializeField] float sliderThreshold;
+	[Range(0.1f, 3f)] [SerializeField] float sliderThreshold = 0.5f; //How Long should the Beat Length be in order to consider Spawning Slider Beats
+	[Range(0.01f, 0.5f)] [SerializeField] float sliderInterval = 0.2f; //How should the Slider Beats be Spread out. Eg. Every 0.2s spawn 1 Slider Beat
 
 	[Header("For Scoring")]
 	[SerializeField] int score;
 	[SerializeField] int combo;
 
-	[Header("For Boxing")]
-	public BoxColor[] gloveColor; //0 Left, 1 Right
-	public Material[] mats; //Follow Box Color Index
+	[Header("Boxing Glove Mat")]
+	public Material[] gloveMats; //Follow Box Color Index
 
 	[Header("For Menus")]
 	public GameState gameState;
@@ -58,6 +69,7 @@ public class GameManager : MonoBehaviour
 	[Header("For Developers Use")]
 	public bool autoMode;
 	public bool generateSliderBeats;
+	public bool playOnStart;
 	public bool showStartDebug;
 	public bool spawnOnlyOneBeat;
 	public List<string> sliderInfo;
@@ -73,32 +85,9 @@ public class GameManager : MonoBehaviour
 	{
 		objPooler = ObjectPooling.inst;
 		songPlayer = GetComponent<AudioSource>();
-		InitialiseBeatMap(selectedMap, mapIndex);
+		if (playOnStart) InitialiseBeatMap(selectedMap, mapIndex);
 
-		if (showStartDebug)
-		{
-			ColoursSection colours = beatmap.ColoursSection;
-			for (int i = 0; i < colours.ComboColours.Count; i++)
-			{
-				print(colours.ComboColours[i]);
-			}
-
-			sliderInfo = new List<string>();
-			for (int i = 0; i < beats.Count; i++)
-			{
-				if (beats[0].GetType() != typeof(Slider))
-				{
-					print(string.Format("Index {0} skipped!", i));
-					continue;
-				}
-
-				string printString = string.Format("Index Slider = {0}. Start Time = {1}ms. End Time = {2}ms. Slider Length = {3}ms. Start Time Span = {4}ms. End Time Span = {5}ms. Total Time Span = {6}ms.",
-				i, beats[i].StartTime, beats[i].EndTime, beats[i].EndTime - beats[i].StartTime, beats[i].StartTimeSpan.TotalMilliseconds, beats[i].EndTimeSpan.TotalMilliseconds, beats[i].TotalTimeSpan.TotalMilliseconds);
-
-				sliderInfo.Add(printString);
-				print(printString);
-			}
-		}
+		if (showStartDebug && beats.Count > 0) StartDebug(); 
 	}
 
 	// Update is called once per frame
@@ -122,12 +111,13 @@ public class GameManager : MonoBehaviour
 	}
 
 	#region Beat Map Initialisation
-	public void TempPlay()
+	public void AssignMapData(BeatmapData bmd, BeatmapInfo bmi)
 	{
-		InitialiseBeatMap(selectedMap, mapIndex);
+		this.bmd = bmd;
+		this.bmi = bmi;
 	}
 
-	public void InitialiseBeatMap(BeatmapObject selectedMap, int mapIndex)
+	public void InitialiseBeatMap(BeatmapObject selectedMap, int mapIndex) //By Scriptable Object. Easier for Testing
 	{
 		this.selectedMap = selectedMap;
 		this.mapIndex = mapIndex;
@@ -158,6 +148,26 @@ public class GameManager : MonoBehaviour
 
 		gameState = GameState.OnPlay;
 	}
+
+	public void InitialiseBeatMap(/*BeatmapData bmd, BeatmapInfo bmi*/) //BMD to Load Clips, BMI to Load Map. Currently Using Variables instead of Parameters
+	{
+		string mapPath = GetMapPath(bmd.folderName, bmi.mapName);
+		songPlayer.clip = bmd.audio;
+		beatmap = BeatmapDecoder.Decode(mapPath);
+		beats = beatmap.HitObjects;
+
+		spawnHitDist = beatHitPos.transform.position.z - beatSpawnPos.transform.position.z;
+		bufferTime = Mathf.Abs(spawnHitDist) / scrollSpeed;
+
+		startTimeOffset = trackDelayTime;
+		float firstBeatTime = (float)beats[0].StartTime / 1000;
+		if (firstBeatTime < bufferTime) startTimeOffset += (bufferTime - firstBeatTime);
+
+		trackStartTime = AudioSettings.dspTime + startTimeOffset;
+		songPlayer.PlayScheduled(trackStartTime);
+
+		gameState = GameState.OnPlay;
+	}
 	#endregion
 
 	#region For Beat Spawning
@@ -173,55 +183,42 @@ public class GameManager : MonoBehaviour
 		//Check if Beat is a Slider
 		double beatLength = beats[0].EndTime - beats[0].StartTime; //Get Total Time Span of Beat 
 
-		if (beatLength > 0 && generateSliderBeats) //If it Qualifies as a Slider
+		if (beatLength/1000 >= sliderThreshold && generateSliderBeats) //If it Qualifies as a Slider
 		{
-			int beatsToSpawn = Mathf.FloorToInt((float)(beatLength/(sliderThreshold * 1000))); //Check how many beats to spawn
-			//print(string.Format("Function Calculates such that it is to spawn {0} Additional Beats. Beat Length is {1}, Slider Threshold is {2}", beatsToSpawn, beatLength, sliderThreshold * 1000));
+			int beatsToSpawn = Mathf.FloorToInt((float)(beatLength/(sliderInterval * 1000))); //Check how many beats to spawn
+			//print(string.Format("Function Calculates such that it is to spawn {0} Additional Beats. Beat Length is {1}, Slider Threshold is {2}", beatsToSpawn, beatLength, sliderInterval * 1000));
 			double beatInterval = beatsToSpawn == 0 ? 0 : beatLength / beatsToSpawn;
 			//print("Beat Interval is " + beatInterval);
 
 			for (int i = 0; i <= beatsToSpawn; i++)
 			{
-				Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity, beatSpawnPos).GetComponent<Beat>(); //Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
+				//Make Last Beat the Directional Beat
+				bool isDirectional = i + 1 == beatsToSpawn;
+				string tag = isDirectional ? "Directional" : "Slider";
 
-				beat.AssignGM(this);
+				//Instantiate(beatPrefabs[1], beatSpawnPos.position, Quaternion.identity);
+				Beat beat = objPooler.SpawnFromPool(tag, beatSpawnPos.position, Quaternion.identity, beatSpawnPos).GetComponent<Beat>(); 
+				beat.InitialiseBeat(this, beatSpawnPos.position, spawnHitDist);
+
+				//Set Slider Beats to their Correct Timing
 				double additionalOffset = beatInterval * i;
-				beat.InitialiseBeat(GetTrackTime() + additionalOffset/1000, beats[0].StartTime + additionalOffset, beatSpawnPos.position, spawnHitDist);
+				beat.SetBeatInstanceValues(GetBoxColorByIndex(colorIndex), GetTrackTime() + additionalOffset/1000, beats[0].StartTime + additionalOffset, isDirectional ? RandomiseValidBeatDirection() : Direction.None);
 				beat.MoveBeatPosition();
-				beat.transform.parent = beatsParent;
 			}
 		}
 		else
 		{
-			//Beat beat = Instantiate(beatPrefabs[colorIndex], beatSpawnPos.position, Quaternion.identity);
-			Beat beat = objPooler.SpawnFromPool(GetPoolTag(colorIndex), beatSpawnPos.position, Quaternion.identity).GetComponent<Beat>();
+			//Beat beat = Instantiate(beatPrefabs[i], beatSpawnPos.position, Quaternion.identity);
+			Beat beat = objPooler.SpawnFromPool("Normal", beatSpawnPos.position, Quaternion.identity, beatSpawnPos).GetComponent<Beat>();
+			beat.InitialiseBeat(this, beatSpawnPos.position, spawnHitDist);
 
-			beat.AssignGM(this);
-			beat.InitialiseBeat(GetTrackTime(), beats[0].StartTime, beatSpawnPos.position, spawnHitDist);
+			beat.SetBeatInstanceValues(GetBoxColorByIndex(colorIndex), GetTrackTime(), beats[0].StartTime);
 			beat.MoveBeatPosition();
-			beat.transform.parent = beatsParent;
 		}
 
 		beats.RemoveAt(0);
 
 		if (spawnOnlyOneBeat) beats.Clear();
-	}
-
-	string GetPoolTag(int colorIndex)
-	{
-		switch (colorIndex)
-		{
-			case 0:
-				return "Red";
-			case 1:
-				return "Blue";
-			case 2:
-				return "Green";
-			case 3:
-				return "Yellow";
-			default:
-				return "None";
-		}
 	}
 
 	//When the Song has ended, a Figure should run towards the Player. 
@@ -303,13 +300,42 @@ public class GameManager : MonoBehaviour
 		gameState = GameState.Loading;
 
 		songPlayer.Stop();
-		InitialiseBeatMap(selectedMap, mapIndex);
+		InitialiseBeatMap(/*bmd, bmi*/);
+
 		score = 0;
 		combo = 0;
 	}
 	#endregion
 
-	#region GetFilePaths
+	#region Modular Functions
+	public static BoxColor GetBoxColorByIndex(int colorIndex)
+	{
+		switch (colorIndex)
+		{
+			case 0:
+				return BoxColor.Red;
+			case 1:
+				return BoxColor.Blue;
+			case 2:
+				return BoxColor.Green;
+			case 3:
+				return BoxColor.Yellow;
+			default:
+				return BoxColor.None;
+		}
+	}
+
+	public Direction RandomiseValidBeatDirection()
+	{
+		int i = Random.Range(1, 100);
+
+		if (i <= 33) return Direction.Up;
+		else if (i <= 66) return Direction.Down;
+		else return Direction.Right; //Only need 1 as if its Left Lane, it must be hit Right. If its Right Lane, it must be hit Left.
+	}
+	#endregion
+
+	#region Get File Paths
 	string GetMapPath(string mapFolder, string mapName)
 	{
 		return string.Format("{0}{1}{2}/{3}.osu", Application.dataPath, beatMapFolder, mapFolder, mapName);
@@ -318,6 +344,33 @@ public class GameManager : MonoBehaviour
 	string GetAudioPath(string mapFolder, string songName)
 	{
 		return string.Format("{0}{1}{2}/{3}", Application.dataPath, beatMapFolder, mapFolder, songName);
+	}
+	#endregion
+
+	#region For Debugging Purposes
+	void StartDebug()
+	{
+		ColoursSection colours = beatmap.ColoursSection;
+		for (int i = 0; i < colours.ComboColours.Count; i++)
+		{
+			print(colours.ComboColours[i]);
+		}
+
+		sliderInfo = new List<string>();
+		for (int i = 0; i < beats.Count; i++)
+		{
+			if (beats[0].GetType() != typeof(Slider))
+			{
+				print(string.Format("Index {0} skipped!", i));
+				continue;
+			}
+
+			string printString = string.Format("Index Slider = {0}. Start Time = {1}ms. End Time = {2}ms. Slider Length = {3}ms. Start Time Span = {4}ms. End Time Span = {5}ms. Total Time Span = {6}ms.",
+			i, beats[i].StartTime, beats[i].EndTime, beats[i].EndTime - beats[i].StartTime, beats[i].StartTimeSpan.TotalMilliseconds, beats[i].EndTimeSpan.TotalMilliseconds, beats[i].TotalTimeSpan.TotalMilliseconds);
+
+			sliderInfo.Add(printString);
+			print(printString);
+		}
 	}
 	#endregion
 }

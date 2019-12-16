@@ -29,12 +29,12 @@ public class Glove : MonoBehaviour
 		if (isLeft)
 		{
 			gloveColor = BoxColor.Red;
-			r.material = gm.mats[0];
+			r.material = gm.gloveMats[0];
 		}
 		else
 		{
 			gloveColor = BoxColor.Blue;
-			r.material = gm.mats[1];
+			r.material = gm.gloveMats[1];
 		}
 	}
 
@@ -62,19 +62,19 @@ public class Glove : MonoBehaviour
 		{
 			case BoxColor.Red:
 				gloveColor = BoxColor.Yellow; //Alternate between Yellow and Red
-				r.material = gm.mats[3];
+				r.material = gm.gloveMats[3];
 				break;
 			case BoxColor.Blue:
 				gloveColor = BoxColor.Green; //Alternate between Green and Blue
-				r.material = gm.mats[2];
+				r.material = gm.gloveMats[2];
 				break;
 			case BoxColor.Green:
 				gloveColor = BoxColor.Blue; //Alternate between Green and Blue
-				r.material = gm.mats[1];
+				r.material = gm.gloveMats[1];
 				break;
 			case BoxColor.Yellow:
 				gloveColor = BoxColor.Red; //Alternate between Yellow and Red
-				r.material = gm.mats[0];
+				r.material = gm.gloveMats[0];
 				break;
 		}
 	}

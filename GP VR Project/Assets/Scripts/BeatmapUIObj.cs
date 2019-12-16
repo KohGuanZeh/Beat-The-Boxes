@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum UIObjType {Song, Beatmap};
 
-public class BeatmapUIObj : MonoBehaviour
+public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	[Header("General Components")]
 	public UIObjType uiObjType;
@@ -15,7 +16,7 @@ public class BeatmapUIObj : MonoBehaviour
 	public BeatmapInfo bmi;
 
 	[Header ("For Displaying Splash Images")]
-	public Texture2D splashImg;
+	//public Texture2D splashImg;
 	public RawImage mainImg; //Should have Component by default
 
 	[Header("For Playing Correct Audio")]
@@ -25,9 +26,7 @@ public class BeatmapUIObj : MonoBehaviour
 	{
 		this.bmd = bmd;
 		audio = bmd.audio;
-		splashImg = bmd.mainSplash;
-
-		mainImg.texture = splashImg;
+		mainImg.texture = bmd.mainSplash;
 	}
 
 	public void AssignBmInfo(BeatmapInfo bmi)
@@ -35,16 +34,48 @@ public class BeatmapUIObj : MonoBehaviour
 		this.bmi = bmi;
 	}
 
+	#region Direct Button Functions
 	//For Song Select UI Objs
-	public void ShowBeatmaps()
+	public void OnSongSelect()
 	{
+		if (UIManager.isTransitioning) return;
 
+		UIManager.isTransitioning = true;
+		anim.SetBool("Clicked", true);
+		anim.SetBool("Is Hovering", false);
+
+		UIManager.inst.PopulateBeatmapSelect(bmd);
 	}
 
 	//For Beatmap Select UI Objs
-	public void PlayMap()
+	public void OnBeatmapSelect()
 	{
-		GameManager.inst.TempPlay();
+		GameManager.inst.AssignMapData(bmd, bmi);
+	}
+	#endregion
+
+	#region Animation Events
+	public void ResetButtonAnimator()
+	{
+		anim.SetBool("Is Hovering", false);
+		anim.SetBool("Clicked", false);
 	}
 
+	public void ShowBeatmaps()
+	{
+		UIManager.inst.OnSongSelect();
+	}
+	#endregion
+
+	#region Pointer Events
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		anim.SetBool("Is Hovering", true);
+	}
+
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		anim.SetBool("Is Hovering", false);
+	}
+	#endregion
 }

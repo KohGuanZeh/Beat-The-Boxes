@@ -12,99 +12,159 @@ public enum BoxType {Normal, Slider, Directional } //Normal is Small Beats, Big 
 
 public class Beat : MonoBehaviour, IPooledObject
 {
-	//0 is Red, 1 is Blue, 2 is Green, 3 is Yellow, 4 is Iron, 5 is Large
 	public static int hitCount;
 
 	[Header("General Components")]
 	[SerializeField] GameManager gm;
-	[SerializeField] float startXDisplaceVal = 0.5f;
-	[SerializeField] float finalXDisplaceVal = 0.15f;
-	[SerializeField] Transform beatMeshObj;
 
 	[Header("Beat Attributes")]
 	public BoxType boxType;
 	public BoxColor boxColor;
 	public Direction hitDir;
 
-	[Header("Beat Rotation")]
-	[SerializeField] float minRot;
-	[SerializeField] float maxRot; //Should always be positive
-	[SerializeField] Vector3 rotation;
+	[Header("Beat Renderers and Materials")]
+	[SerializeField] Renderer beatR;
+	[SerializeField] Renderer markerR;
+	[SerializeField] Material beatMat;
+	[SerializeField] Material markerMat;
+
+	[Header("Beat Spawn Fixed Offsets")]
+	[SerializeField] float xOffsetRef = 0.3f; //Magnitude of X Offset from Beat Spawn Pos Transform. Ref as xOffset differs based on Color
+	[SerializeField] float xOffset; //Var to use to set the Position when moving the Beat 
+	[SerializeField] float yOffset = 0; //Y Offset from Beat Spawn Pos Transform
 
 	[Header("Set Target Time and Position")]
-	[SerializeField] double spawnedTime;
-	[SerializeField] double targetTime;
-	[SerializeField] Vector3 spawnPos;
-	[SerializeField] float spawnHitDist; //Z Displacement
-	[SerializeField] float xDisplacement; //X Displacement
+	[SerializeField] double spawnedTime; //Time that Beat Spawns
+	[SerializeField] double targetTime; //Time that the Beat is meant to be Hit
+	[SerializeField] Vector3 spawnPos; //Position of Beat Spawn Position. Used as Ref to get the Offset from Spawn Position to move the Beat
+	[SerializeField] float spawnHitDist; //Total Distance between Spawn Position and Hit Position
+
+	[Header("Hit Threshold")]
+	[SerializeField] float hitVelSqrThreshold; //Square Magnitude of Required Velocity to Count as Hit 
 
 	// Update is called once per frame
 	void Update()
     {
 		MoveBeatPosition();
-		Rotate();
-
 		if (gm.autoMode) AutoHitBeat();
 	}
 
 	#region For Beat Initialisation
-	public void AssignGM(GameManager gm)
+	//For Initialisation that will only be called Once
+	public void InitialiseBeat(GameManager gm, Vector3 spawnPos, float spawnHitDist)
 	{
-		if (this.gm == null) this.gm = gm;
+		if (this.gm == null)
+		{
+			this.gm = gm;
+
+			beatMat = beatR.material;
+			markerMat = markerR.material;
+
+			//Should only need to be called once unless you want to play with Different Spawn Positions
+			this.spawnPos = spawnPos; //Get the Spawn Position Transform.position
+			this.spawnHitDist = spawnHitDist; //Get the Total Distance between the Spawn and Hit Position
+
+			/*switch (boxType)
+			{
+				case BoxType.Normal:
+					hitVelSqrThreshold = 25;
+					break;
+				case BoxType.Directional:
+					hitVelSqrThreshold = 25;
+					break;
+				case BoxType.Slider:
+					hitVelSqrThreshold = 20;
+					break;
+			}*/
+		}
 	}
 
-	public void InitialiseBeat(double spawnedTime, double targetTime, Vector3 spawnPos, float spawnHitDist)
+	//Box Type has already been set in Prefabs
+	//Set Values to get the Timings and Renderers right
+	public void SetBeatInstanceValues(BoxColor color, double spawnedTime, double targetTime, Direction boxDir = Direction.None, bool debugValues = false) // Vector3 spawnPos, float spawnHitDist
 	{
-		beatMeshObj = transform.GetChild(0);
-
 		this.spawnedTime = spawnedTime;
 		this.targetTime = targetTime / 1000;
 
-		this.spawnPos = spawnPos;
-		this.spawnHitDist = spawnHitDist;
+		boxColor = color;
+		hitDir = boxDir;
 
-		if (boxType == BoxType.Normal)
+		SetColoredBeatValues(color);
+
+		//Change Arrow Angle here as Hit Direction may change based on Color. (Left to Right, Right to Left)
+		switch (hitDir)
 		{
-			switch (boxColor)
-			{
-				case BoxColor.Red:
-					SetDisplacement(false);
-					break;
-				case BoxColor.Yellow:
-					SetDisplacement(false);
-					break;
-				case BoxColor.Blue:
-					SetDisplacement(true);
-					break;
-				case BoxColor.Green:
-					SetDisplacement(true);
-					break;
-			}
+			case Direction.Left:
+				markerR.transform.localEulerAngles = new Vector3(0, 0, 90);
+				break;
+			case Direction.Down:
+				markerR.transform.localEulerAngles = new Vector3(0, 0, 180);
+				break;
+			case Direction.Right:
+				markerR.transform.localEulerAngles = new Vector3(0, 0, 270);
+				break;
+			default:
+				markerR.transform.localEulerAngles = new Vector3(0, 0, 0);
+				break;
 		}
 
-		//X Rotation should always be Negative. Y and Z rotation (+/-) will be random
-		rotation = new Vector3(-Random.Range(minRot, maxRot),
-								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot),
-								MathFunctions.RandomisePositiveNegative() * Random.Range(minRot, maxRot));
-
-		print(string.Format("Beat initialised. Transform is: {0}. Target Time is: {1}. Spawned Time is: {2}. Spawn Position is: {3} Box Color is: {4}", transform.position.z, this.targetTime, this.spawnedTime, this.spawnPos, boxColor));
+		if (debugValues) print(string.Format("Beat initialised. Transform is: {0}. Target Time is: {1}. Spawned Time is: {2}. Spawn Position is: {3} Box Color is: {4}", transform.position.z, this.targetTime, this.spawnedTime, spawnPos, boxColor));
 	}
 
-	void UninitialiseBeat()
+	void SetColoredBeatValues(BoxColor color)
+	{
+		//Left 90 degrees
+		switch (color)
+		{
+			case BoxColor.Red:
+				xOffset = -xOffsetRef;
+				//if (hitDir == Direction.Left) hitDir = Direction.Right; //Not Needed as Default for Horizontal is Direction.Right
+
+				MaterialUtils.ChangeMaterialColor(beatMat, gm.diffuseColors[0]);
+				MaterialUtils.ChangeMaterialEmission(beatMat, gm.emissiveColors[0], gm.emissiveIntensities[0]);
+
+				MaterialUtils.ChangeMaterialColor(markerMat, gm.diffuseColors[0]);
+				MaterialUtils.ChangeMaterialEmission(markerMat, gm.emissiveColors[0], gm.emissiveIntensities[0]);
+				break;
+			case BoxColor.Yellow:
+				xOffset = -xOffsetRef;
+				//if (hitDir == Direction.Left) hitDir = Direction.Right; //Not Needed as Default for Horizontal is Direction.Right
+
+				MaterialUtils.ChangeMaterialColor(beatMat, gm.diffuseColors[3]);
+				MaterialUtils.ChangeMaterialEmission(beatMat, gm.emissiveColors[3], gm.emissiveIntensities[3]);
+
+				MaterialUtils.ChangeMaterialColor(markerMat, gm.diffuseColors[3]);
+				MaterialUtils.ChangeMaterialEmission(markerMat, gm.emissiveColors[3], gm.emissiveIntensities[3]);
+				break;
+			case BoxColor.Blue:
+				xOffset = xOffsetRef;
+				if (hitDir == Direction.Right) hitDir = Direction.Left;
+
+				MaterialUtils.ChangeMaterialColor(beatMat, gm.diffuseColors[1]);
+				MaterialUtils.ChangeMaterialEmission(beatMat, gm.emissiveColors[1], gm.emissiveIntensities[1]);
+
+				MaterialUtils.ChangeMaterialColor(markerMat, gm.diffuseColors[1]);
+				MaterialUtils.ChangeMaterialEmission(markerMat, gm.emissiveColors[1], gm.emissiveIntensities[1]);
+
+				
+				break;
+			case BoxColor.Green:
+				xOffset = xOffsetRef;
+				if (hitDir == Direction.Right) hitDir = Direction.Left;
+
+				MaterialUtils.ChangeMaterialColor(beatMat, gm.diffuseColors[2]);
+				MaterialUtils.ChangeMaterialEmission(beatMat, gm.emissiveColors[2], gm.emissiveIntensities[2]);
+
+				MaterialUtils.ChangeMaterialColor(markerMat, gm.diffuseColors[2]);
+				MaterialUtils.ChangeMaterialEmission(markerMat, gm.emissiveColors[2], gm.emissiveIntensities[2]);
+				break;
+		}
+	}
+
+	void ResetBeatValues()
 	{
 		spawnedTime = 0;
 		targetTime = 0;
-
-		spawnPos = Vector3.zero;
-		spawnHitDist = 0;
-
-		xDisplacement = 0;
-	}
-
-	void SetDisplacement(bool isPositive)
-	{
-		if (isPositive) xDisplacement = startXDisplaceVal;
-		else xDisplacement = -startXDisplaceVal;
 	}
 	#endregion
 
@@ -145,28 +205,14 @@ public class Beat : MonoBehaviour, IPooledObject
 	public void MoveBeatPosition()
 	{
 		float zOffset = Mathf.LerpUnclamped(0, spawnHitDist, GetOffsetRatio());
-		if (float.IsNaN(zOffset))
-		{
-			print("Nan Detected");
-			zOffset = 0;
-		}
-		float xOffset = xDisplacement;
-		float yOffset = 0;
+		if (float.IsNaN(zOffset)) zOffset = 0;
+
 		transform.position = spawnPos + new Vector3(xOffset, yOffset, zOffset);
-		
-		//if (GetOffsetRatio() >= 1.0f) Destroy(gameObject);
 	}
 
 	float GetOffsetRatio()
 	{
 		return (float)((gm.GetTrackTime() - spawnedTime) / (targetTime - spawnedTime));
-	}
-	#endregion
-
-	#region For Beat Rotation
-	void Rotate()
-	{
-		transform.Rotate(rotation * Time.deltaTime);
 	}
 	#endregion
 
@@ -183,18 +229,16 @@ public class Beat : MonoBehaviour, IPooledObject
 
 	public string GetPoolTag()
 	{
-		switch (boxColor)
+		switch (boxType)
 		{
-			case BoxColor.Red:
-				return "Red";
-			case BoxColor.Yellow:
-				return "Yellow";
-			case BoxColor.Blue:
-				return "Blue";
-			case BoxColor.Green:
-				return "Green";
+			case BoxType.Normal:
+				return "Normal";
+			case BoxType.Slider:
+				return "Slider";
+			case BoxType.Directional:
+				return "Directional";
 			default:
-				return "None";
+				return "Normal";
 		}
 	}
 	#endregion
@@ -209,7 +253,7 @@ public class Beat : MonoBehaviour, IPooledObject
 
 			print(GetHitDirection(hitVel.normalized));
 
-			if (glove.gloveColor != boxColor || hitVel.sqrMagnitude < 25) return;
+			if (glove.gloveColor != boxColor || hitVel.sqrMagnitude < hitVelSqrThreshold) return;
 
 			switch (boxType)
 			{
