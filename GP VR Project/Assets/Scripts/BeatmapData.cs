@@ -6,15 +6,19 @@ using UnityEngine;
 public struct BeatmapInfo
 {
 	[SerializeField] public string mapName;
+	[SerializeField] public string creator;
 	[SerializeField] public float difficulty;
-	[SerializeField] List<ScoreInfo> scores;
+	[SerializeField] public List<ScoreInfo> scores;
 }
 
 [System.Serializable]
 public struct ScoreInfo
 {
+	[SerializeField] public Grade grade;
 	[SerializeField] public int score;
 	[SerializeField] public int maxCombo;
+	[SerializeField] public int hits;
+	[SerializeField] public int miss;
 }
 
 [System.Serializable]
@@ -22,6 +26,8 @@ public class BeatmapData
 {
 	[SerializeField] public string folderName;
 	[SerializeField] public List<BeatmapInfo> mapInfos;
+	[SerializeField] public string songName; //For UI Display Purposes
+	[SerializeField] public string artistName; //For UI Display Purposes
 	[SerializeField] public string audioFilePath;
 	[SerializeField] public string imgFilePath;
 	public AudioClip audio;

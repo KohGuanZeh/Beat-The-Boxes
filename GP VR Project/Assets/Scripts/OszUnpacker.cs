@@ -34,6 +34,25 @@ public class OszUnpacker : MonoBehaviour
     {
 		bmds = LoadBeatmapData();
 
+		foreach (BeatmapData bmd in bmds)
+		{
+			for (int i = 0; i < bmd.mapInfos.Count; i++)
+			{ 
+				string mapPath = string.Format("{0}{1}{2}/{3}.osu", Application.dataPath, osuDumpPath, bmd.folderName, bmd.mapInfos[i].mapName);
+				Beatmap bm = BeatmapDecoder.Decode(mapPath);
+
+				if (i == 0)
+				{
+					bmd.songName = bm.MetadataSection.Title;
+					bmd.artistName = bm.MetadataSection.Artist;
+				}
+
+				BeatmapInfo bmi = bmd.mapInfos[i];
+				bmi.creator = bm.MetadataSection.Creator;
+				bmd.mapInfos[i] = bmi;
+			}
+		}
+
 		tempPath = Application.dataPath + osuDumpPath + "Temp/";
 		if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath); //Ensure that the Temp Directory Exist to dump files
 
@@ -125,6 +144,8 @@ public class OszUnpacker : MonoBehaviour
 				else bmdExists = true;
 
 				bmd.folderName = folderName;
+				bmd.songName = beatmap.MetadataSection.Title;
+				bmd.artistName = beatmap.MetadataSection.Artist;
 
 				if (!Directory.Exists(dumpPath)) Directory.CreateDirectory(dumpPath);
 
@@ -157,6 +178,7 @@ public class OszUnpacker : MonoBehaviour
 			BeatmapInfo bmi = new BeatmapInfo
 			{
 				mapName = GetFileNameNoExt(allMapPaths[i]),
+				creator = beatmap.MetadataSection.Creator,
 				difficulty = beatmap.DifficultySection.OverallDifficulty
 			};
 

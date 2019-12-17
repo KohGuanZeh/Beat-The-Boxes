@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7553292252511188721, guid: 7e5011a363aa0ae4fa5701e512624893,
         type: 3}
       propertyPath: m_Name
-      value: Beatmap Select
+      value: Beatmap Select Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7553292252511188721, guid: 7e5011a363aa0ae4fa5701e512624893,
         type: 3}
@@ -132,10 +132,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7553292252900336718, guid: 7e5011a363aa0ae4fa5701e512624893,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0a66c17c4617d8f41bc18d313a8ab945, type: 2}
     - target: {fileID: 9111899260710079505, guid: 7e5011a363aa0ae4fa5701e512624893,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayMap
+      value: OnBeatmapSelect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5011a363aa0ae4fa5701e512624893, type: 3}

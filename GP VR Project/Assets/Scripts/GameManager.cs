@@ -11,12 +11,14 @@ using OsuParsers.Decoders;
 
 public enum GameState {Menu, Loading, OnPlay, Paused, Ended};
 
+public enum Grade {S, A, B, C, D};
+
 public class GameManager : MonoBehaviour
 {
 	[Header("General Components")]
 	public static GameManager inst;
 	[SerializeField] ObjectPooling objPooler;
-	[SerializeField] AudioSource songPlayer;
+	public AudioSource songPlayer;
 	[SerializeField] const string beatMapFolder = @"/Resources/Beatmaps/";
 
 	[Header("Load Beatmap via SO")]

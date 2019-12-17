@@ -362,15 +362,20 @@ MonoBehaviour:
   bmd:
     folderName: 
     mapInfos: []
+    songName: 
+    artistName: 
     audioFilePath: 
     imgFilePath: 
     audio: {fileID: 0}
     mainSplash: {fileID: 0}
   bmi:
     mapName: 
+    creator: 
     difficulty: 0
     scores: []
   mainImg: {fileID: 5960059903998585361}
+  isHovering: 0
+  hoverTime: 0
   audio: {fileID: 0}
 --- !u!95 &7553292252900336718
 Animator:
@@ -435,7 +440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7553292252900336719}
-        m_MethodName: ShowBeatmaps
+        m_MethodName: OnSongSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

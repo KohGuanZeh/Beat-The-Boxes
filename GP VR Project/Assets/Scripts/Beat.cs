@@ -64,7 +64,7 @@ public class Beat : MonoBehaviour, IPooledObject
 			this.spawnPos = spawnPos; //Get the Spawn Position Transform.position
 			this.spawnHitDist = spawnHitDist; //Get the Total Distance between the Spawn and Hit Position
 
-			/*switch (boxType)
+			switch (boxType)
 			{
 				case BoxType.Normal:
 					hitVelSqrThreshold = 25;
@@ -75,7 +75,7 @@ public class Beat : MonoBehaviour, IPooledObject
 				case BoxType.Slider:
 					hitVelSqrThreshold = 20;
 					break;
-			}*/
+			}
 		}
 	}
 
