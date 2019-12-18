@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
 			for (int i = 0; i <= beatsToSpawn; i++)
 			{
 				//Make Last Beat the Directional Beat
-				bool isDirectional = i + 1 == beatsToSpawn;
+				bool isDirectional = (i == beatsToSpawn);
 				string tag = isDirectional ? "Directional" : "Slider";
 
 				//Instantiate(beatPrefabs[1], beatSpawnPos.position, Quaternion.identity);

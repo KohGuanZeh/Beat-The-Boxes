@@ -83,12 +83,6 @@ public class UIManager : MonoBehaviour
 		PopulateSongSelect();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 	public void PopulateSongSelect()
 	{
 		songHolder.sizeDelta = new Vector2(sizePerNewObj * bmds.Count, songHolder.sizeDelta.y);
@@ -196,6 +190,16 @@ public class UIManager : MonoBehaviour
 				break;
 		}
 	}
+	#endregion
+
+	#region Direct Button Functions
+	public void StartGame()
+	{
+		//Transit to Song Select
+		anim.SetTrigger("Trigger Clicked");
+	}
+
+
 	#endregion
 
 	#region Button and Animation Events

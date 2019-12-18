@@ -62,7 +62,15 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	//For Beatmap Select UI Objs
 	public void OnBeatmapSelect()
 	{
+		if (UIManager.isTransitioning || !UIManager.inst.CanTriggerScrollButtons()) return;
+
+		UIManager.isTransitioning = true;
+		anim.SetBool("Clicked", true);
+		anim.SetBool("Is Hovering", false);
+
 		GameManager.inst.AssignMapData(bmd, bmi);
+		UIManager.inst.OnTransitionEnd += ResetButtonAnimator;
+		UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
 	}
 	#endregion
 
@@ -77,6 +85,11 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public void ShowBeatmaps()
 	{
 		UIManager.inst.OnSongSelect();
+	}
+
+	public void CloseMenu()
+	{
+		UIManager.inst.OnBeatmapSelect();
 	}
 	#endregion
 
