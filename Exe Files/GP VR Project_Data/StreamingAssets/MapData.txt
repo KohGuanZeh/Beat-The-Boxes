@@ -1,0 +1,428 @@
+{
+    "beatmaps": [
+        {
+            "folderName": "Dive to World - 0",
+            "mapInfos": [
+                {
+                    "mapName": "Cherry Blossom - Dive to World (hutka) [Normal]",
+                    "creator": "hutka",
+                    "difficulty": 1.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Cherry Blossom - Dive to World (hutka) [dksslqj's Normal+]",
+                    "creator": "hutka",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Cherry Blossom - Dive to World (hutka) [Hard]",
+                    "creator": "hutka",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Cherry Blossom - Dive to World (hutka) [orion's Little Streams]",
+                    "creator": "hutka",
+                    "difficulty": 8.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Dive to World",
+            "artistName": "Cherry Blossom",
+            "audioFilePath": "Beatmaps/Dive to World - 0/01 - DIVE TO WORLD",
+            "imgFilePath": "Beatmaps/Dive to World - 0/back ground",
+            "audio": {
+                "m_FileID": 2256,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2258,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Harumodoki (TV Size) - 545139",
+            "mapInfos": [
+                {
+                    "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Normal]",
+                    "creator": "In your heart",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Hard]",
+                    "creator": "In your heart",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Insane]",
+                    "creator": "In your heart",
+                    "difficulty": 8.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Harumodoki (TV Size)",
+            "artistName": "yanaginagi",
+            "audioFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/audio",
+            "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage",
+            "audio": {
+                "m_FileID": 2268,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2270,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Hello,world! - 302799",
+            "mapInfos": [
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Easy]",
+                    "creator": "tutuhaha",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Normal]",
+                    "creator": "tutuhaha",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Hard]",
+                    "creator": "tutuhaha",
+                    "difficulty": 5.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Habi's Insane]",
+                    "creator": "tutuhaha",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Insane]",
+                    "creator": "tutuhaha",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Extra]",
+                    "creator": "tutuhaha",
+                    "difficulty": 8.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Hello,world!",
+            "artistName": "BUMP OF CHICKEN",
+            "audioFilePath": "Beatmaps/Hello,world! - 302799/Hello,world!",
+            "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5",
+            "audio": {
+                "m_FileID": 2274,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2272,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "in the Garden - 492525",
+            "mapInfos": [
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Yuii-'s Normal]",
+                    "creator": "MrSergio",
+                    "difficulty": 3.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Normal]",
+                    "creator": "MrSergio",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [pkhg's Hard]",
+                    "creator": "MrSergio",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Ufw's Advanced]",
+                    "creator": "MrSergio",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Garven's Hard]",
+                    "creator": "MrSergio",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Jonimay's Extra]",
+                    "creator": "MrSergio",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [Vincent's Insane]",
+                    "creator": "MrSergio",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Primary - in the Garden (MrSergio) [flowerBed]",
+                    "creator": "MrSergio",
+                    "difficulty": 9.0,
+                    "scores": []
+                }
+            ],
+            "songName": "in the Garden",
+            "artistName": "Primary",
+            "audioFilePath": "Beatmaps/in the Garden - 492525/audio",
+            "imgFilePath": "Beatmaps/in the Garden - 492525/flowers",
+            "audio": {
+                "m_FileID": 2276,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2278,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "L.L.L. - 334466",
+            "mapInfos": [
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Trust's Easy]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Normal]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 3.799999952316284,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Hard]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 5.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Raose's Hard]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 6.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Tt's Insane]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 7.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Irre's Insane]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Nyquill's minimal pp]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [captin's Extra]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 8.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "MYTH & ROID - L.L.L. (jonathanlfj) [Overkill]",
+                    "creator": "jonathanlfj",
+                    "difficulty": 9.0,
+                    "scores": []
+                }
+            ],
+            "songName": "L.L.L.",
+            "artistName": "MYTH & ROID",
+            "audioFilePath": "Beatmaps/L.L.L. - 334466/lol",
+            "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0",
+            "audio": {
+                "m_FileID": 2286,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2284,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Pride Kakumei - 335534",
+            "mapInfos": [
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Easy]",
+                    "creator": "Aerous",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Normal]",
+                    "creator": "Aerous",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Natsu's Hard]",
+                    "creator": "Aerous",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [iMage's Insane]",
+                    "creator": "Aerous",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Extra]",
+                    "creator": "Aerous",
+                    "difficulty": 7.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (Aerous) [Guy's Extra]",
+                    "creator": "Aerous",
+                    "difficulty": 8.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Pride Kakumei",
+            "artistName": "CHiCO with HoneyWorks",
+            "audioFilePath": "Beatmaps/Pride Kakumei - 335534/Pride Revolution",
+            "imgFilePath": "Beatmaps/Pride Kakumei - 335534/BG+Aerous+Coke",
+            "audio": {
+                "m_FileID": 2290,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2288,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Pride Kakumei - 342242",
+            "mapInfos": [
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Atsuro's Easy]",
+                    "creator": "monstrata",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Collab Normal]",
+                    "creator": "monstrata",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Milan-'s Hard]",
+                    "creator": "monstrata",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Insane]",
+                    "creator": "monstrata",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Pride Kakumei (monstrata) [Darkness]",
+                    "creator": "monstrata",
+                    "difficulty": 8.699999809265137,
+                    "scores": []
+                }
+            ],
+            "songName": "Pride Kakumei",
+            "artistName": "CHiCO with HoneyWorks",
+            "audioFilePath": "Beatmaps/Pride Kakumei - 342242/01. ",
+            "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei",
+            "audio": {
+                "m_FileID": 2292,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2294,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Wolf - 514507",
+            "mapInfos": [
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Easy]",
+                    "creator": "Irohas",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Normal]",
+                    "creator": "Irohas",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Hard]",
+                    "creator": "Irohas",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [pkhg's Insane]",
+                    "creator": "Irohas",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Janpai's Insane]",
+                    "creator": "Irohas",
+                    "difficulty": 7.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Sotarks' Expert]",
+                    "creator": "Irohas",
+                    "difficulty": 8.199999809265137,
+                    "scores": []
+                },
+                {
+                    "mapName": "CHiCO with HoneyWorks - Wolf (Irohas) [Kanto's Memories]",
+                    "creator": "Irohas",
+                    "difficulty": 8.5,
+                    "scores": []
+                }
+            ],
+            "songName": "Wolf",
+            "artistName": "CHiCO with HoneyWorks",
+            "audioFilePath": "Beatmaps/Wolf - 514507/audio",
+            "imgFilePath": "Beatmaps/Wolf - 514507/massugu",
+            "audio": {
+                "m_FileID": 2296,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2298,
+                "m_PathID": 0
+            }
+        }
+    ]
+}

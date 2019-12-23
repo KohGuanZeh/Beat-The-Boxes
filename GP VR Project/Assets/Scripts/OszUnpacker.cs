@@ -56,7 +56,7 @@ public class OszUnpacker : MonoBehaviour
 
 	public void UnpackOszInRunTime()
 	{
-		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu || !UIManager.inst.pressedGameStart) return;
+		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu || !UIManager.inst.allowRuntimeUnpack) return;
 
 		FileInfo[] oszFiles = GetNewOszFiles();
 		if (oszFiles.Length > 0)
@@ -81,10 +81,14 @@ public class OszUnpacker : MonoBehaviour
 
 		print("Loading File Assets");
 
-		UIManager.inst.BackToSongSelect();
+		if (UIManager.inst.selectPhase == 1)
+		{
+			UIManager.inst.ignoreSavedScrollPos = true;
+			UIManager.inst.BackToSongSelect();
+		} 
 		UIManager.inst.PopulateSongSelect();
 		//print(bmds.IndexOf(bmds.Where(item => item.folderName == lastAddedBmd.folderName).FirstOrDefault()));
-		UIManager.inst.SelectSpecificSong(bmds.IndexOf(lastAddedBmd));
+		UIManager.inst.SelectSpecificSong(bmds.IndexOf(bmds.Where(item => item.folderName == lastAddedBmd.folderName).FirstOrDefault()));
 
 		yield return null;
 	}

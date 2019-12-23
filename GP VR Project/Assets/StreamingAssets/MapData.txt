@@ -111,10 +111,10 @@
             "audioFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/audio",
             "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice",
             "audio": {
-                "instanceID": 19954
+                "instanceID": 20048
             },
             "mainSplash": {
-                "instanceID": 21952
+                "instanceID": 22048
             }
         },
         {
@@ -144,10 +144,10 @@
             "audioFilePath": "Beatmaps/Anoko Secret - 855906/audio",
             "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal",
             "audio": {
-                "instanceID": 27098
+                "instanceID": 27206
             },
             "mainSplash": {
-                "instanceID": 28246
+                "instanceID": 28354
             }
         },
         {
@@ -177,10 +177,10 @@
             "audioFilePath": "Beatmaps/As You Like It - 841277/audio",
             "imgFilePath": "Beatmaps/As You Like It - 841277/evew",
             "audio": {
-                "instanceID": 19618
+                "instanceID": 19712
             },
             "mainSplash": {
-                "instanceID": 22270
+                "instanceID": 22368
             }
         },
         {
@@ -222,10 +222,10 @@
             "audioFilePath": "Beatmaps/Catch the Moment - 572897/audio",
             "imgFilePath": "Beatmaps/Catch the Moment - 572897/BG",
             "audio": {
-                "instanceID": 17216
+                "instanceID": 17304
             },
             "mainSplash": {
-                "instanceID": 28608
+                "instanceID": 28716
             }
         },
         {
@@ -273,10 +273,10 @@
             "audioFilePath": "Beatmaps/Fist Bump - 779577/audio",
             "imgFilePath": "Beatmaps/Fist Bump - 779577/BG",
             "audio": {
-                "instanceID": 25680
+                "instanceID": 25784
             },
             "mainSplash": {
-                "instanceID": 23230
+                "instanceID": 23332
             }
         },
         {
@@ -324,10 +324,10 @@
             "audioFilePath": "Beatmaps/Future Coaster - 1056866/audio",
             "imgFilePath": "Beatmaps/Future Coaster - 1056866/thanks nifty",
             "audio": {
-                "instanceID": 16414
+                "instanceID": 16502
             },
             "mainSplash": {
-                "instanceID": 27346
+                "instanceID": 27454
             }
         },
         {
@@ -337,22 +337,7 @@
                     "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Normal]",
                     "creator": "In your heart",
                     "difficulty": 4.0,
-                    "scores": [
-                        {
-                            "grade": 1,
-                            "score": 524100,
-                            "maxCombo": 181,
-                            "hits": 181,
-                            "miss": 23
-                        },
-                        {
-                            "grade": 0,
-                            "score": 870900,
-                            "maxCombo": 235,
-                            "hits": 235,
-                            "miss": 0
-                        }
-                    ]
+                    "scores": []
                 },
                 {
                     "mapName": "yanaginagi - Harumodoki (TV Size) (In your heart) [Hard]",
@@ -372,10 +357,10 @@
             "audioFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/audio",
             "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage",
             "audio": {
-                "instanceID": 24270
+                "instanceID": 24374
             },
             "mainSplash": {
-                "instanceID": 25974
+                "instanceID": 26078
             }
         },
         {
@@ -438,10 +423,10 @@
             "audioFilePath": "Beatmaps/Hello,world! - 302799/Hello,world!",
             "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5",
             "audio": {
-                "instanceID": 29740
+                "instanceID": 29856
             },
             "mainSplash": {
-                "instanceID": 22280
+                "instanceID": 22378
             }
         },
         {
@@ -501,10 +486,10 @@
             "audioFilePath": "Beatmaps/in the Garden - 492525/audio",
             "imgFilePath": "Beatmaps/in the Garden - 492525/flowers",
             "audio": {
-                "instanceID": 22060
+                "instanceID": 22158
             },
             "mainSplash": {
-                "instanceID": 24648
+                "instanceID": 24754
             }
         },
         {
@@ -514,15 +499,7 @@
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Easy]",
                     "creator": "Amandia",
                     "difficulty": 2.0,
-                    "scores": [
-                        {
-                            "grade": 0,
-                            "score": 285300,
-                            "maxCombo": 132,
-                            "hits": 132,
-                            "miss": 0
-                        }
-                    ]
+                    "scores": []
                 },
                 {
                     "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Normal]",
@@ -560,10 +537,10 @@
             "audioFilePath": "Beatmaps/Inferno (TV Size) - 999645/te",
             "imgFilePath": "Beatmaps/Inferno (TV Size) - 999645/720685",
             "audio": {
-                "instanceID": 17404
+                "instanceID": 17492
             },
             "mainSplash": {
-                "instanceID": 27898
+                "instanceID": 28006
             }
         },
         {
@@ -629,10 +606,10 @@
             "audioFilePath": "Beatmaps/L.L.L. - 334466/lol",
             "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0",
             "audio": {
-                "instanceID": 30058
+                "instanceID": 30178
             },
             "mainSplash": {
-                "instanceID": 26044
+                "instanceID": 26148
             }
         },
         {
@@ -680,10 +657,10 @@
             "audioFilePath": "Beatmaps/Pride Kakumei - 335534/Pride Revolution",
             "imgFilePath": "Beatmaps/Pride Kakumei - 335534/BG+Aerous+Coke",
             "audio": {
-                "instanceID": 17450
+                "instanceID": 17542
             },
             "mainSplash": {
-                "instanceID": 27926
+                "instanceID": 28034
             }
         },
         {
@@ -725,10 +702,10 @@
             "audioFilePath": "Beatmaps/Pride Kakumei - 342242/01. ",
             "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei",
             "audio": {
-                "instanceID": 22258
+                "instanceID": 22356
             },
             "mainSplash": {
-                "instanceID": 23900
+                "instanceID": 24002
             }
         },
         {
@@ -782,10 +759,10 @@
             "audioFilePath": "Beatmaps/Wolf - 514507/audio",
             "imgFilePath": "Beatmaps/Wolf - 514507/massugu",
             "audio": {
-                "instanceID": 27724
+                "instanceID": 27832
             },
             "mainSplash": {
-                "instanceID": 26122
+                "instanceID": 26226
             }
         }
     ]

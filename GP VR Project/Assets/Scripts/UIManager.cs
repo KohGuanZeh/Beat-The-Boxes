@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 	[Header("General Components")]
 	public static UIManager inst;
 	public static bool isTransitioning; //Static Bool to prevent Button Events from Triggering as it Plays Animation
-	public bool pressedGameStart;
+	public bool allowRuntimeUnpack;
 	[SerializeField] GameManager gm;
 	[SerializeField] BeatmapUIObj songObjPrefab;
 	[SerializeField] GraphicRaycaster raycaster;
@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour
 	[Header("For Scroll Rect")]
 	[SerializeField] ScrollRect scroll;
 	[SerializeField] Vector2 songSelectNormalizedPos;
+	public bool ignoreSavedScrollPos;
 
 	[Header("For Button SFX")]
 	[SerializeField] AudioSource buttonSfxPlayer;
@@ -93,7 +94,7 @@ public class UIManager : MonoBehaviour
 
 	[Header("For Animations")]
 	[SerializeField] Animator anim;
-	[SerializeField] int selectPhase = 0;
+	public int selectPhase = 0;
 
 	public delegate void UITransitionDel();
 	UITransitionDel OnTransitionEnd;
@@ -147,8 +148,20 @@ public class UIManager : MonoBehaviour
 		foreach (BeatmapUIObj songObj in songObjs) Destroy(songObj.gameObject);
 		songObjs.Clear();
 
-		songHolder.sizeDelta = new Vector2(sizePerNewObj * OszUnpacker.bmds.Count, songHolder.sizeDelta.y);
-		content.sizeDelta = new Vector2(songHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y); //6 because can view max 7 at once. 3 at start, 3 at end. Required so that the First and Last Obj can be at the middle
+		bool moreThanSeven = OszUnpacker.bmds.Count > 7;
+
+		if (moreThanSeven)
+		{
+			songHolder.sizeDelta = new Vector2(sizePerNewObj * OszUnpacker.bmds.Count, songHolder.sizeDelta.y);
+			songHolder.anchoredPosition = new Vector2(105, songHolder.anchoredPosition.y);
+			content.sizeDelta = new Vector2(songHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y); //6 because can view max 7 at once. 3 at start, 3 at end. Required so that the First and Last Obj can be at the middle
+		}
+		else
+		{
+			songHolder.sizeDelta = new Vector2(245, songHolder.sizeDelta.y);
+			songHolder.anchoredPosition = new Vector2(0, songHolder.anchoredPosition.y);
+			content.sizeDelta = new Vector2(songHolder.sizeDelta.x, content.sizeDelta.y);
+		}
 
 		for (int i = 0; i < OszUnpacker.bmds.Count; i++)
 		{
@@ -167,9 +180,18 @@ public class UIManager : MonoBehaviour
 		foreach (BeatmapUIObj beatmap in beatmaps) ObjectPooling.inst.ReturnToPool(beatmap.gameObject, "Beatmap UI");
 		beatmaps.Clear();
 
-		beatmapHolder.sizeDelta = new Vector2(sizePerNewObj * bmd.mapInfos.Count, beatmapHolder.sizeDelta.y);
-		//May want to use a different Scroll Rect just for Beatmap Select
+		bool moreThanSeven = bmd.mapInfos.Count > 7;
 
+		if (moreThanSeven)
+		{
+			beatmapHolder.sizeDelta = new Vector2(sizePerNewObj * bmd.mapInfos.Count, beatmapHolder.sizeDelta.y);
+			beatmapHolder.anchoredPosition = new Vector2(105, beatmapHolder.anchoredPosition.y);
+		}
+		else
+		{
+			beatmapHolder.sizeDelta = new Vector2(245, beatmapHolder.sizeDelta.y);
+			beatmapHolder.anchoredPosition = new Vector2(0, beatmapHolder.anchoredPosition.y);
+		}
 
 		for (int i = 0; i < bmd.mapInfos.Count; i++)
 		{
@@ -185,7 +207,7 @@ public class UIManager : MonoBehaviour
 	public void SelectRandomSongOnStart()
 	{
 		int index = Random.Range(0, songObjs.Count);
-		content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
+		if (songObjs.Count > 7) content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
 		scroll.normalizedPosition = scroll.normalizedPosition;
 		OnHoverSelect(songObjs[index], false);
 	}
@@ -193,7 +215,7 @@ public class UIManager : MonoBehaviour
 	public void SelectSpecificSong(int index)
 	{
 		if (index >= songObjs.Count) return;
-		content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
+		if (songObjs.Count > 7) content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
 		scroll.normalizedPosition = scroll.normalizedPosition;
 		OnHoverSelect(songObjs[index], false);
 	}
@@ -313,7 +335,7 @@ public class UIManager : MonoBehaviour
 		//Transit to Song Select
 		isTransitioning = true;
 		anim.SetTrigger("Trigger Clicked");
-		SuscribeToOnTransitionEvents(false, () => pressedGameStart = true);
+		SuscribeToOnTransitionEvents(false, () => allowRuntimeUnpack = true);
 		SuscribeToOnTransitionEvents(false, () => anim.ResetTrigger("Trigger Clicked"));
 	}
 
@@ -419,6 +441,7 @@ public class UIManager : MonoBehaviour
 
 		isTransitioning = true;
 		anim.SetBool("Close Menu", true);
+		allowRuntimeUnpack = false;
 
 		bool showMainMenu = false;
 
@@ -498,6 +521,8 @@ public class UIManager : MonoBehaviour
 		selectPhase = 2;
 		anim.SetInteger("Select Phase", selectPhase);
 
+		allowRuntimeUnpack = false;
+
 		anim.SetBool("Rotate To Side", true);
 		anim.SetTrigger("Rotate");
 
@@ -561,6 +586,7 @@ public class UIManager : MonoBehaviour
 			allPanelGroups[7].buttonGroup.SetActive(true);
 		}
 
+		if (panelIndex == 0 || panelIndex == 1) SuscribeToOnTransitionEvents(true, () => SuscribeToOnTransitionEvents(false, () => allowRuntimeUnpack = true));
 		anim.SetBool("Close Menu", false);
 	}
 
@@ -572,7 +598,8 @@ public class UIManager : MonoBehaviour
 			allPanelGroups[1].panel.SetActive(true);
 
 			//Reset Scroll Rect
-			content.sizeDelta = new Vector2(beatmapHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y);
+			float additionalOffset = beatmaps.Count <= 7 ? 0 : sizePerNewObj * 6;
+			content.sizeDelta = new Vector2(beatmapHolder.sizeDelta.x + additionalOffset, content.sizeDelta.y);
 			scroll.normalizedPosition = Vector2.zero;
 			OnHoverSelect(beatmaps[0], false, true);
 		}
@@ -582,8 +609,11 @@ public class UIManager : MonoBehaviour
 			allPanelGroups[1].panel.SetActive(false);
 
 			//For Resetting Scroll Rect
-			content.sizeDelta = new Vector2(songHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y);
-			scroll.normalizedPosition = songSelectNormalizedPos; //Value of its Previous Position is Recorded when Button is Pressed
+			float additionalOffset = songObjs.Count <= 7 ? 0 : sizePerNewObj * 6;
+			content.sizeDelta = new Vector2(songHolder.sizeDelta.x + additionalOffset, content.sizeDelta.y);
+
+			if (ignoreSavedScrollPos) ignoreSavedScrollPos = false;
+			else scroll.normalizedPosition = songSelectNormalizedPos; //Value of its Previous Position is Recorded when Button is Pressed
 		}
 	}
 

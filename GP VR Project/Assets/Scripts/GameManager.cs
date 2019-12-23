@@ -247,14 +247,12 @@ public class GameManager : MonoBehaviour
 		{
 			isNewHighscore = true;
 			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Add(scoreInfo);
-			BeatmapInfo info = OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex];
-			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex] = info;
 			OszUnpacker.SaveBeatmapData(OszUnpacker.bmds);
 		}
 
 		if (isNewHighscore)
 		{
-			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Sort((x, y) => x.score.CompareTo(y.score)); //Sort According to Highest Score
+			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Sort((x, y) => y.score.CompareTo(x.score)); //Sort According to Highest Score
 			UIManager.inst.RepopulateHighscores(OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex]);
 			OszUnpacker.SaveBeatmapData(OszUnpacker.bmds);
 		}
