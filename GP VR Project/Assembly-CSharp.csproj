@@ -461,6 +461,7 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_BlitFlip.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
+    <None Include="Assets\Backup\MapData.txt" />
     <None Include="Assets\Simple World\Simple Town\ChangeLog.txt" />
     <None Include="Assets\_MyProject\Scenes\Notes.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

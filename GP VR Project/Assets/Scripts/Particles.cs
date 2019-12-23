@@ -16,10 +16,8 @@ public class Particles : MonoBehaviour, IPooledObject
 
 	public void OnObjectSpawn()
 	{
-		if (!pSys) pSys = GetComponent<ParticleSystem>();
-		if (!audio) audio = GetComponent<AudioSource>();
 		pSys.Play(true);
-		audio.Play();
+		if (audio && audio.clip != null) audio.Play();
 	}
 
 	public void OnObjectDespawn()

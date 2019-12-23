@@ -58,7 +58,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6796877921196106863}
   serializedVersion: 6
   lengthInSec: 0.1
-  simulationSpeed: 5
+  simulationSpeed: 4
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -122,7 +122,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -283,8 +283,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
-      minScalar: 2.5
+      scalar: 0.75
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -727,7 +727,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 0.05
       mode: 0
       spread: 0
       speed:
@@ -956,7 +956,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 10
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1021,21 +1021,30 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.25
-          inSlope: 0.16084561
-          outSlope: 0.16084561
+          value: 0
+          inSlope: 2.916667
+          outSlope: 2.916667
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.24285711
+          outWeight: 0.17075422
         - serializedVersion: 3
-          time: 1
+          time: 0.5019745
           value: 1
-          inSlope: 1.3124995
-          outSlope: 1.3124995
+          inSlope: 0.10998974
+          outSlope: 0.10998974
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.21428579
+          inWeight: 0.5659996
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -3.6177845
+          outSlope: -3.6177845
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.18645078
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4803,7 +4812,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4281852958258402630, guid: a39bd786d1c231645b6f5b9af071dcea,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: dec48f490f07cde48a5d4bed36bbea2c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1

@@ -48,7 +48,9 @@ public class BeatmapData
 	public bool RemoveFromJson()
 	{
 		if (!audio) return true;
-		mapInfos.RemoveAll(item => !System.IO.File.Exists(string.Format("{0}/Resources/{1}/{2}.osu", Application.dataPath, folderName, item.mapName)));
+		//Debug.Log(System.IO.File.Exists(string.Format("{0}/Resources/Beatmaps/{1}/{2}.osu", Application.dataPath, folderName, mapInfos[0].mapName)));
+		//Debug.Log(!System.IO.File.Exists(string.Format("{0}/Resources/Beatmaps/{1}/{2}.osu", Application.dataPath, folderName, mapInfos[0].mapName)));
+		mapInfos.RemoveAll(item => !System.IO.File.Exists(string.Format("{0}/Resources/Beatmaps/{1}/{2}.osu", Application.dataPath, folderName, item.mapName)));
 		if (mapInfos.Count == 0) return true;
 
 		return false;

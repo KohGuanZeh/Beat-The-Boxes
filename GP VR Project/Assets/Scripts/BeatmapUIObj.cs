@@ -68,7 +68,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 		UIManager.inst.PopulateBeatmapSelect(bmdIndex);
 		UIManager.inst.SuscribeToOnTransitionEvents(false, ResetButtonAnimator);
-		UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
+		UIManager.inst.OnHoverSelect(this, false); //Display the Thing on Big Screen
 	}
 
 	//For Beatmap Select UI Objs
@@ -78,14 +78,13 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 		print(scrollRect.velocity.sqrMagnitude);
 		UIManager.isTransitioning = true; //Need Manually Set to True as it is not Linked with Canvas UI
-		UIManager.inst.SaveScrollPosition();
 		UIManager.inst.PlayButtonSound(0);
 		anim.SetBool("Clicked", true);
 		anim.SetBool("Is Hovering", false);
 
 		GameManager.inst.AssignMapData(bmdIndex, bmiIndex);
 		UIManager.inst.SuscribeToOnTransitionEvents(false, () => UIManager.inst.SuscribeToOnTransitionEvents(true, () => UIManager.inst.SuscribeToOnTransitionEvents(false, ResetButtonAnimator)));
-		UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
+		UIManager.inst.OnHoverSelect(this, false); //Display the Thing on Big Screen
 	}
 	#endregion
 
@@ -130,7 +129,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		if (isHovering && !UIManager.isTransitioning)
 		{
 			hoverTime = Mathf.Max(hoverTime + Time.deltaTime, 0.5f);
-			if (hoverTime >= 0.75f) UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
+			if (hoverTime >= 0.5f) UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
 		}
 		else hoverTime = 0;
 	}

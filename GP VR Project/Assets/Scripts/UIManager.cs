@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
 	[Header("General Components")]
 	public static UIManager inst;
 	public static bool isTransitioning; //Static Bool to prevent Button Events from Triggering as it Plays Animation
+	public bool pressedGameStart;
 	[SerializeField] GameManager gm;
 	[SerializeField] BeatmapUIObj songObjPrefab;
 	[SerializeField] GraphicRaycaster raycaster;
@@ -143,7 +144,8 @@ public class UIManager : MonoBehaviour
 
 	public void PopulateSongSelect()
 	{
-		foreach (BeatmapUIObj songObj in songObjs) Destroy(songObj);
+		foreach (BeatmapUIObj songObj in songObjs) Destroy(songObj.gameObject);
+		songObjs.Clear();
 
 		songHolder.sizeDelta = new Vector2(sizePerNewObj * OszUnpacker.bmds.Count, songHolder.sizeDelta.y);
 		content.sizeDelta = new Vector2(songHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y); //6 because can view max 7 at once. 3 at start, 3 at end. Required so that the First and Last Obj can be at the middle
@@ -185,8 +187,7 @@ public class UIManager : MonoBehaviour
 		int index = Random.Range(0, songObjs.Count);
 		content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
 		scroll.normalizedPosition = scroll.normalizedPosition;
-		//songObjs[index].anim.SetBool("Is Hovering", true);
-		OnHoverSelect(songObjs[index]);
+		OnHoverSelect(songObjs[index], false);
 	}
 
 	public void SelectSpecificSong(int index)
@@ -194,8 +195,7 @@ public class UIManager : MonoBehaviour
 		if (index >= songObjs.Count) return;
 		content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
 		scroll.normalizedPosition = scroll.normalizedPosition;
-		//songObjs[index].anim.SetBool("Is Hovering", true);
-		OnHoverSelect(songObjs[index]);
+		OnHoverSelect(songObjs[index], false);
 	}
 
 	public bool CanTriggerScrollButtons()
@@ -204,7 +204,7 @@ public class UIManager : MonoBehaviour
 		return scroll.velocity.sqrMagnitude < 1f;
 	}
 
-	public void OnHoverSelect(BeatmapUIObj uiObj, bool forceInvoke = false)
+	public void OnHoverSelect(BeatmapUIObj uiObj, bool playButtonSound = true, bool forceInvoke = false)
 	{
 		switch (uiObj.uiObjType)
 		{
@@ -212,6 +212,7 @@ public class UIManager : MonoBehaviour
 
 				if (currentSelectedSong == uiObj && !forceInvoke) return;
 
+				if (currentSelectedSong) currentSelectedSong.anim.SetBool("Is Hovering", false);
 				currentSelectedSong = uiObj;
 
 				songTitle.text = OszUnpacker.bmds[currentSelectedSong.bmdIndex].songName;
@@ -225,7 +226,7 @@ public class UIManager : MonoBehaviour
 				gm.songPlayer.clip = currentSelectedSong.audio;
 				gm.songPlayer.Play();
 
-				PlayButtonSound(0);
+				if (playButtonSound) PlayButtonSound(1);
 
 				anim.SetTrigger("New Select");
 				break;
@@ -234,6 +235,7 @@ public class UIManager : MonoBehaviour
 
 				if (currentSelectedBeatmap == uiObj && !forceInvoke) return;
 
+				if (currentSelectedBeatmap) currentSelectedBeatmap.anim.SetBool("Is Hovering", false);
 				currentSelectedBeatmap = uiObj;
 
 				BeatmapInfo bmi = OszUnpacker.bmds[currentSelectedSong.bmdIndex].mapInfos[currentSelectedBeatmap.bmiIndex];
@@ -246,7 +248,7 @@ public class UIManager : MonoBehaviour
 
 				RepopulateHighscores(bmi);
 
-				PlayButtonSound(0);
+				if (playButtonSound) PlayButtonSound(1);
 
 				anim.SetTrigger("New Select");
 				break;
@@ -311,6 +313,7 @@ public class UIManager : MonoBehaviour
 		//Transit to Song Select
 		isTransitioning = true;
 		anim.SetTrigger("Trigger Clicked");
+		SuscribeToOnTransitionEvents(false, () => pressedGameStart = true);
 		SuscribeToOnTransitionEvents(false, () => anim.ResetTrigger("Trigger Clicked"));
 	}
 
@@ -381,7 +384,7 @@ public class UIManager : MonoBehaviour
 				{
 					anim.SetBool("Close Menu", true);
 					SuscribeToOnTransitionEvents(true, () => SuscribeToOnTransitionEvents(false, () => ReopenPanel(1, true)));
-					SuscribeToOnTransitionEvents(true, () => SuscribeToOnTransitionEvents(false, () => OnHoverSelect(currentSelectedSong, true)));
+					SuscribeToOnTransitionEvents(true, () => SuscribeToOnTransitionEvents(false, () => OnHoverSelect(currentSelectedSong, false, true)));
 				});
 				break;
 			case GameState.Ended:
@@ -392,6 +395,7 @@ public class UIManager : MonoBehaviour
 				anim.SetInteger("Select Phase", selectPhase);
 
 				CloseOpenMenu(1);
+				SuscribeToOnTransitionEvents(false, () => OnHoverSelect(currentSelectedSong, false, true));
 				break;
 		}
 	}
@@ -570,7 +574,7 @@ public class UIManager : MonoBehaviour
 			//Reset Scroll Rect
 			content.sizeDelta = new Vector2(beatmapHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y);
 			scroll.normalizedPosition = Vector2.zero;
-			OnHoverSelect(beatmaps[0]);
+			OnHoverSelect(beatmaps[0], false, true);
 		}
 		else
 		{

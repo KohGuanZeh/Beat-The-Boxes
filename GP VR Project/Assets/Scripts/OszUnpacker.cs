@@ -56,14 +56,14 @@ public class OszUnpacker : MonoBehaviour
 
 	public void UnpackOszInRunTime()
 	{
-		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu) return;
+		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu || !UIManager.inst.pressedGameStart) return;
 
 		FileInfo[] oszFiles = GetNewOszFiles();
-		overlayCanvas.gameObject.SetActive(true);
 		if (oszFiles.Length > 0)
 		{
 			unpackingInProgress = true;
 			runtimeUnpacking = true;
+			overlayCanvas.gameObject.SetActive(true);
 		}
 		else return;
 
@@ -79,8 +79,11 @@ public class OszUnpacker : MonoBehaviour
 		SaveBeatmapData(bmds);
 		overlayCanvas.gameObject.SetActive(false);
 
+		print("Loading File Assets");
+
 		UIManager.inst.BackToSongSelect();
 		UIManager.inst.PopulateSongSelect();
+		//print(bmds.IndexOf(bmds.Where(item => item.folderName == lastAddedBmd.folderName).FirstOrDefault()));
 		UIManager.inst.SelectSpecificSong(bmds.IndexOf(lastAddedBmd));
 
 		yield return null;
@@ -197,13 +200,15 @@ public class OszUnpacker : MonoBehaviour
 		bmd.LoadAssets();
 		if (!bmdExists) bmds.Add(bmd);
 
-		if (runtimeUnpacking) lastAddedBmd = bmd;
+		if (runtimeUnpacking) lastAddedBmd = bmds.Last();
 
 		/*DirectoryInfo dir = new DirectoryInfo(tempPath);
 		foreach (FileInfo file in dir.GetFiles()) File.Delete(file.FullName);*/
 
 		Directory.Delete(tempPath, true);
 		File.Delete(oszFile.FullName);
+
+		print("Unpacking File Completed");
 	}
 
 	#region For Getting File Infos and File Names

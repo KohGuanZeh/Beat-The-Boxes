@@ -42,11 +42,6 @@ public class Beat : MonoBehaviour, IPooledObject
 	[Header("Hit Threshold")]
 	[SerializeField] float hitVelSqrThreshold; //Square Magnitude of Required Velocity to Count as Hit 
 
-	[Header("Hit and Despawn Effects")]
-	[SerializeField] AudioSource sfx;
-	[SerializeField] AudioClip hitSound;
-	[SerializeField] AudioClip despawnSound;
-
 	// Update is called once per frame
 	void Update()
     {
@@ -183,9 +178,8 @@ public class Beat : MonoBehaviour, IPooledObject
 	{
 		//Play Sound Effect
 		gm.AddScore(score);
-		ObjectPooling.inst.SpawnFromPool("Hit Particles", transform.position, Quaternion.identity);
-		//sfx.clip = hitSound;
-		//sfx.Play();
+		GameObject particle = ObjectPooling.inst.SpawnFromPool("Hit Particles", transform.position, Quaternion.identity);
+		particle.transform.localScale = transform.localScale;
 		ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
 	}
 
@@ -254,10 +248,10 @@ public class Beat : MonoBehaviour, IPooledObject
 	#region Forced Despawn
 	public void ForceDespawn(bool inDestroyZone = true)
 	{
-		Quaternion rotation = inDestroyZone ? Quaternion.identity : Quaternion.Euler(-90, 0, 0);
-		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", transform.position, rotation);
-		//sfx.clip = despawnSound;
-		//sfx.Play();
+		Vector3 position = transform.position;
+		position.y = 0;
+
+		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", position, Quaternion.Euler(-90, 0, 0));
 		ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag());
 	}
 	#endregion
