@@ -221,7 +221,9 @@ public class Beat : MonoBehaviour, IPooledObject
 	#region Pooling Functions
 	public void OnObjectSpawn()
 	{
-		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", transform.position, Quaternion.Euler(-90, 0, 0));
+		Vector3 pos = transform.position;
+		pos.y = 0;
+		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", pos, Quaternion.Euler(-90, 0, 0));
 	}
 
 	public void OnObjectDespawn()
