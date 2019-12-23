@@ -25,6 +25,7 @@ public class OszUnpacker : MonoBehaviour
 	[SerializeField] DirectoryInfo streamingAssetsDirInfo;
 	[SerializeField] string tempPath; //Cache Temp Path as it will always be used to Dump all Files from Osz first when Extracting
 	[SerializeField] bool unpackingInProgress;
+	[SerializeField] GameObject overlayCanvas;
 
 	/*public delegate void VoidDelegate();
 	public VoidDelegate OnUnpackedEnded;*/
@@ -34,46 +35,12 @@ public class OszUnpacker : MonoBehaviour
     {
 		bmds = LoadBeatmapData();
 
-		foreach (BeatmapData bmd in bmds)
-		{
-			for (int i = 0; i < bmd.mapInfos.Count; i++)
-			{ 
-				string mapPath = string.Format("{0}{1}{2}/{3}.osu", Application.dataPath, osuDumpPath, bmd.folderName, bmd.mapInfos[i].mapName);
-				Beatmap bm = BeatmapDecoder.Decode(mapPath);
-
-				if (i == 0)
-				{
-					bmd.songName = bm.MetadataSection.Title;
-					bmd.artistName = bm.MetadataSection.Artist;
-				}
-
-				BeatmapInfo bmi = bmd.mapInfos[i];
-				bmi.creator = bm.MetadataSection.Creator;
-				bmd.mapInfos[i] = bmi;
-			}
-		}
-
 		tempPath = Application.dataPath + osuDumpPath + "Temp/";
 		if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath); //Ensure that the Temp Directory Exist to dump files
 
-		#region For BMO to BMD Conversion
-		/*if (initialiseBmos)
-		{
-			foreach (BeatmapObject bmo in bmos)
-			{
-				BeatmapData bmd = new BeatmapData(bmo.folderName);
-				bmd.mapInfos = bmo.mapInfos;
-				bmd.audioFile = bmo.audioFile;
-				BeatmapManager.beatmaps.Add(bmd);
-			}
-
-			BeatmapManager.SaveBeatMapData();
-		}*/
-		#endregion
-
 		streamingAssetsDirInfo = new DirectoryInfo(Application.streamingAssetsPath);
 		FileInfo[] oszFiles = GetNewOszFiles();
-		if (oszFiles.Length > 0) unpackingInProgress = false;
+		if (oszFiles.Length > 0) unpackingInProgress = true;
 
 		foreach (FileInfo oszFile in oszFiles) UnpackOszFile(oszFile);
 
@@ -81,6 +48,26 @@ public class OszUnpacker : MonoBehaviour
 		print("Unpacking Completed");
 
 		SaveBeatmapData(bmds);
+
+		InvokeRepeating("UnpackOszInRunTime", 5, 5);
+	}
+
+	public void UnpackOszInRunTime()
+	{
+		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu) return;
+
+		FileInfo[] oszFiles = GetNewOszFiles();
+		if (oszFiles.Length > 0) unpackingInProgress = true;
+		else return;
+
+		StartCoroutine(UnpackOszFiles(oszFiles));
+	}
+
+	IEnumerator UnpackOszFiles(FileInfo[] oszFiles)
+	{
+		foreach (FileInfo oszFile in oszFiles) UnpackOszFile(oszFile);
+
+		yield return null;
 	}
 
 	#region For Saving and Loading Beatmap Data
@@ -182,6 +169,8 @@ public class OszUnpacker : MonoBehaviour
 				difficulty = beatmap.DifficultySection.OverallDifficulty
 			};
 
+			bmi.scores = new List<ScoreInfo>();
+
 			//Check for any missing Beatmap Info
 			if (!bmdExists || !bmd.mapInfos.Exists(x => x.mapName == bmi.mapName)) bmd.mapInfos.Add(bmi);
 			if (!File.Exists(string.Format("{0}{1}{2}", dumpPath, bmi.mapName, ".osu"))) File.Move(allMapPaths[i], string.Format("{0}{1}{2}", dumpPath, bmi.mapName, ".osu"));
@@ -200,7 +189,7 @@ public class OszUnpacker : MonoBehaviour
 	#region For Getting File Infos and File Names
 	FileInfo[] GetNewOszFiles()
 	{
-		return streamingAssetsDirInfo.GetFiles("*.osz");
+		return streamingAssetsDirInfo.GetFiles("*.osz", SearchOption.TopDirectoryOnly);
 	}
 
 	string GetFileNameNoExt(string filePath)

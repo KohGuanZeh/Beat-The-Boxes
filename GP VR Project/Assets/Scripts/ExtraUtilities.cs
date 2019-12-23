@@ -20,7 +20,7 @@ public class LambdaExpressionExample
 		else return false;
 	}
 
-	public bool LambdaExperienceTwo(int index, string name, float val)
+	public bool LambdaExpressionTwo(int index, string name, float val)
 	{
 		if (index > 0 && name != string.Empty && val > 0) return true;
 		else return false;

@@ -111,10 +111,10 @@
             "audioFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/audio",
             "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice",
             "audio": {
-                "instanceID": 18950
+                "instanceID": 18952
             },
             "mainSplash": {
-                "instanceID": 20620
+                "instanceID": 20622
             }
         },
         {
@@ -144,10 +144,10 @@
             "audioFilePath": "Beatmaps/Anoko Secret - 855906/audio",
             "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal",
             "audio": {
-                "instanceID": 25060
+                "instanceID": 25076
             },
             "mainSplash": {
-                "instanceID": 26050
+                "instanceID": 26066
             }
         },
         {
@@ -177,10 +177,10 @@
             "audioFilePath": "Beatmaps/As You Like It - 841277/audio",
             "imgFilePath": "Beatmaps/As You Like It - 841277/evew",
             "audio": {
-                "instanceID": 18668
+                "instanceID": 18670
             },
             "mainSplash": {
-                "instanceID": 20880
+                "instanceID": 20884
             }
         },
         {
@@ -225,7 +225,7 @@
                 "instanceID": 16552
             },
             "mainSplash": {
-                "instanceID": 26362
+                "instanceID": 26378
             }
         },
         {
@@ -273,10 +273,10 @@
             "audioFilePath": "Beatmaps/Fist Bump - 779577/audio",
             "imgFilePath": "Beatmaps/Fist Bump - 779577/BG",
             "audio": {
-                "instanceID": 23838
+                "instanceID": 23842
             },
             "mainSplash": {
-                "instanceID": 21710
+                "instanceID": 21714
             }
         },
         {
@@ -327,7 +327,7 @@
                 "instanceID": 15876
             },
             "mainSplash": {
-                "instanceID": 25264
+                "instanceID": 25280
             }
         },
         {
@@ -357,10 +357,10 @@
             "audioFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/audio",
             "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage",
             "audio": {
-                "instanceID": 22654
+                "instanceID": 22658
             },
             "mainSplash": {
-                "instanceID": 24080
+                "instanceID": 24084
             }
         },
         {
@@ -408,10 +408,10 @@
             "audioFilePath": "Beatmaps/Hello,world! - 302799/Hello,world!",
             "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5",
             "audio": {
-                "instanceID": 27366
+                "instanceID": 27384
             },
             "mainSplash": {
-                "instanceID": 20886
+                "instanceID": 20890
             }
         },
         {
@@ -471,10 +471,10 @@
             "audioFilePath": "Beatmaps/in the Garden - 492525/audio",
             "imgFilePath": "Beatmaps/in the Garden - 492525/flowers",
             "audio": {
-                "instanceID": 20694
+                "instanceID": 20698
             },
             "mainSplash": {
-                "instanceID": 22948
+                "instanceID": 22952
             }
         },
         {
@@ -525,7 +525,7 @@
                 "instanceID": 16714
             },
             "mainSplash": {
-                "instanceID": 25730
+                "instanceID": 25746
             }
         },
         {
@@ -591,10 +591,10 @@
             "audioFilePath": "Beatmaps/L.L.L. - 334466/lol",
             "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0",
             "audio": {
-                "instanceID": 27628
+                "instanceID": 27646
             },
             "mainSplash": {
-                "instanceID": 24138
+                "instanceID": 24142
             }
         },
         {
@@ -645,7 +645,7 @@
                 "instanceID": 16744
             },
             "mainSplash": {
-                "instanceID": 25752
+                "instanceID": 25768
             }
         },
         {
@@ -687,10 +687,10 @@
             "audioFilePath": "Beatmaps/Pride Kakumei - 342242/01. ",
             "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei",
             "audio": {
-                "instanceID": 20868
+                "instanceID": 20872
             },
             "mainSplash": {
-                "instanceID": 22328
+                "instanceID": 22332
             }
         },
         {
@@ -744,10 +744,10 @@
             "audioFilePath": "Beatmaps/Wolf - 514507/audio",
             "imgFilePath": "Beatmaps/Wolf - 514507/massugu",
             "audio": {
-                "instanceID": 25592
+                "instanceID": 25608
             },
             "mainSplash": {
-                "instanceID": 24202
+                "instanceID": 24218
             }
         }
     ]

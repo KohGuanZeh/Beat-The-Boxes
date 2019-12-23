@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int mapIndex;
 
 	[Header("Load Beatmap via BMD and BMI")]
-	[SerializeField] BeatmapData bmd;
-	[SerializeField] BeatmapInfo bmi;
+	[SerializeField] int bmdIndex;
+	[SerializeField] int bmiIndex; //Need to get Index of BMI
 
 	[Header("Beatmap Infos")]
 	[SerializeField] Beatmap beatmap;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 	[Header("Track Time")]
 	[SerializeField] float trackDelayTime;
 	[SerializeField] double trackStartTime;
+	[SerializeField] double trackEndTime;
 
 	[Header("Beat Instantiation (Timing)")]
 	[Range(10, 50)] public float scrollSpeed; //Controls how fast the Beats go towards the Player
@@ -59,8 +60,9 @@ public class GameManager : MonoBehaviour
 	[Range(0.01f, 0.5f)] [SerializeField] float sliderInterval = 0.2f; //How should the Slider Beats be Spread out. Eg. Every 0.2s spawn 1 Slider Beat
 
 	[Header("For Scoring")]
-	[SerializeField] int score;
+	[SerializeField] ScoreInfo scoreInfo;
 	[SerializeField] int combo;
+	[SerializeField] int scoreMult;
 
 	[Header("Boxing Glove Mat")]
 	public Material[] gloveMats; //Follow Box Color Index
@@ -102,21 +104,18 @@ public class GameManager : MonoBehaviour
 				if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
 			}
 
-			//if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
+			if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
 		}
 
 		//For Pause
-		if (Input.GetKeyDown(KeyCode.Escape)) PausePlayGame();
-
-		//Acts as a Retry Button
-		if (Input.GetKeyDown(KeyCode.Alpha0)) Retry();
+		//if (Input.GetKeyDown(KeyCode.Escape)) PauseUnPauseGame();
 	}
 
 	#region Beat Map Initialisation
-	public void AssignMapData(BeatmapData bmd, BeatmapInfo bmi)
+	public void AssignMapData(int bmdIndex, int bmiIndex)
 	{
-		this.bmd = bmd;
-		this.bmi = bmi;
+		this.bmdIndex = bmdIndex;
+		this.bmiIndex = bmiIndex;
 	}
 
 	public void InitialiseBeatMap(BeatmapObject selectedMap, int mapIndex) //By Scriptable Object. Easier for Testing
@@ -153,8 +152,8 @@ public class GameManager : MonoBehaviour
 
 	public void InitialiseBeatMap(/*BeatmapData bmd, BeatmapInfo bmi*/) //BMD to Load Clips, BMI to Load Map. Currently Using Variables instead of Parameters
 	{
-		string mapPath = GetMapPath(bmd.folderName, bmi.mapName);
-		songPlayer.clip = bmd.audio;
+		string mapPath = GetMapPath(OszUnpacker.bmds[bmdIndex].folderName, OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].mapName);
+		songPlayer.clip = OszUnpacker.bmds[bmdIndex].audio;
 		beatmap = BeatmapDecoder.Decode(mapPath);
 		beats = beatmap.HitObjects;
 
@@ -166,6 +165,7 @@ public class GameManager : MonoBehaviour
 		if (firstBeatTime < bufferTime) startTimeOffset += (bufferTime - firstBeatTime);
 
 		trackStartTime = AudioSettings.dspTime + startTimeOffset;
+		trackEndTime = AudioSettings.dspTime + 1.5f + (float)(beats[beats.Count - 1].EndTime) / 1000; //Get the Track End Time
 		songPlayer.PlayScheduled(trackStartTime);
 
 		gameState = GameState.OnPlay;
@@ -223,14 +223,42 @@ public class GameManager : MonoBehaviour
 		if (spawnOnlyOneBeat) beats.Clear();
 	}
 
-	//When the Song has ended, a Figure should run towards the Player. 
-	//When it reaches the Player and the Player fails to land the first hit in time, the Game will just end
-	//Player needs to hit a Specific part of the Figure (Single Beat).
-	//If Player manages to land the first hit, 2 more hearbeat will spawn before Player lands the final Combo Punches.
-	//Use Invoke Repeating for the Heatbeats and Combos for Accurate time (if needed)
 	void OnSongEnd()
 	{
-		
+		gameState = GameState.Ended;
+
+		CalculateGrade();
+
+		bool isNewHighscore = false;
+
+		// Compare with Previous Highscores
+		if (OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Count >= 3)
+		{
+			if ((scoreInfo.score > OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores[2].score) || 
+				(scoreInfo.score == OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores[2].score && (int)scoreInfo.grade < (int)OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores[2].grade))
+			{
+				OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores[2] = scoreInfo;
+				isNewHighscore = true;
+			}
+		}
+		else
+		{
+			isNewHighscore = true;
+			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Add(scoreInfo);
+			BeatmapInfo info = OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex];
+			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex] = info;
+			OszUnpacker.SaveBeatmapData(OszUnpacker.bmds);
+		}
+
+		if (isNewHighscore)
+		{
+			OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].scores.Sort((x, y) => x.score.CompareTo(y.score)); //Sort According to Highest Score
+			UIManager.inst.RepopulateHighscores(OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex]);
+			OszUnpacker.SaveBeatmapData(OszUnpacker.bmds);
+		}
+
+		UIManager.inst.PopulateScore(scoreInfo, isNewHighscore);
+		UIManager.inst.ShowEndScore();
 	}
 	#endregion
 
@@ -252,60 +280,113 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 	#region For Scoring and Combo System
-	public void AddScore(int score = 30)
+	public void AddScore(int score = 300)
 	{
-		score *= ++combo; //Add to Combo and Multiply it with the Score
-		this.score += score;
-	}
+		scoreInfo.hits++;
+		scoreInfo.maxCombo = Mathf.Max(scoreInfo.maxCombo, ++combo);
 
-	public void SubtractScore(int penalty = 100)
-	{
-		BreakCombo();
-		score = Mathf.Max(score - penalty, 0);
+		int additionalMult = Mathf.FloorToInt((float)combo/10);
+		scoreMult = 1 + additionalMult;
+
+		score *= scoreMult; //Add to Combo and Multiply it with the Score
+		scoreInfo.score += score;
+
+		UIManager.inst.UpdateScores(scoreInfo.score, combo, scoreMult);
 	}
 
 	public void BreakCombo()
 	{
+		scoreInfo.miss++;
+
+		scoreMult = 1;
 		combo = 0;
+
+		UIManager.inst.UpdateScores(scoreInfo.score, combo, scoreMult);
+	}
+
+	public void ResetScoring()
+	{
+		scoreInfo.score = 0;
+		scoreInfo.grade = Grade.D;
+
+		scoreInfo.maxCombo = 0;
+		combo = 0;
+
+		scoreInfo.hits = 0;
+		scoreInfo.miss = 0;
+
+		scoreMult = 1;
+	}
+
+	public void CalculateGrade()
+	{
+		float hitPercentage = (float)scoreInfo.hits / (scoreInfo.hits + scoreInfo.miss);
+
+		if (hitPercentage >= 0.9f) scoreInfo.grade = Grade.S;
+		else if (hitPercentage >= 0.75f) scoreInfo.grade = Grade.A;
+		else if (hitPercentage >= 0.6f) scoreInfo.grade = Grade.B;
+		else if (hitPercentage >= 0.5f) scoreInfo.grade = Grade.C;
+		else scoreInfo.grade = Grade.D;
 	}
 	#endregion
 
 	#region For Menus
-	public void PausePlayGame()
+	public void PauseUnPauseGame()
 	{
+		if (UIManager.isTransitioning) return;
+
 		switch (gameState)
 		{
 			case GameState.OnPlay:
 				gameState = GameState.Paused;
-				Time.timeScale = 0;
 				AudioListener.pause = true;
+				UIManager.inst.OnOptionsScreenOpen(true); //Set Text to Paused instead of Options
+				UIManager.inst.ReopenPanel(5);
 				break;
 			case GameState.Paused:
-				gameState = GameState.OnPlay;
-				Time.timeScale = 1;
-				AudioListener.pause = false;
+				//Pause the Game Again with Menu Showing
+				if (UIManager.inst.triggerClickToContinue.activeSelf)
+				{
+					UIManager.inst.triggerClickToContinue.SetActive(false);
+					UIManager.inst.OnOptionsScreenOpen(true);
+					UIManager.inst.ReopenPanel(5);
+				}
+				else
+				{
+					UIManager.inst.triggerClickToContinue.SetActive(true);
+					UIManager.inst.ContinueGame();
+				}
 				break;
+		}
+	}
+
+	public void ResumeGame()
+	{
+		if (gameState == GameState.Paused && UIManager.inst.triggerClickToContinue.activeSelf)
+		{
+			UIManager.inst.triggerClickToContinue.SetActive(false);
+
+			gameState = GameState.OnPlay;
+			AudioListener.pause = false;
 		}
 	}
 
 	public void Retry()
 	{
-		//Check if the Game State is Paused
-		if (gameState == GameState.Paused)
-		{
-			Time.timeScale = 1;
-			AudioListener.pause = false;
-		}
+		AudioListener.pause = false;
 
 		//Find a Better Way to Find Objects Of Type
-		foreach (Beat beat in FindObjectsOfType<Beat>()) objPooler.ReturnToPool(beat.gameObject, beat.GetPoolTag());
+		ReturnAllSpawnedBeatsToPool();
 		gameState = GameState.Loading;
 
 		songPlayer.Stop();
+		ResetScoring();
 		InitialiseBeatMap(/*bmd, bmi*/);
+	}
 
-		score = 0;
-		combo = 0;
+	public void ReturnAllSpawnedBeatsToPool()
+	{
+		foreach (Beat beat in FindObjectsOfType<Beat>()) objPooler.ReturnToPool(beat.gameObject, beat.GetPoolTag());
 	}
 	#endregion
 

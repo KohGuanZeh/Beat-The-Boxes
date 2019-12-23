@@ -174,7 +174,7 @@ public class Beat : MonoBehaviour, IPooledObject
 		if (GetOffsetRatio() >= 1.0f) Hit();
 	}
 
-	public void Hit(int score = 30, bool destroy = true)
+	public void Hit(int score = 300, bool destroy = true)
 	{
 		//Play Sound Effect
 		gm.AddScore(score);
@@ -251,7 +251,7 @@ public class Beat : MonoBehaviour, IPooledObject
 			Glove glove = other.GetComponent<Glove>();
 			Vector3 hitVel = glove.GetControllerVelocity();
 
-			print(GetHitDirection(hitVel.normalized));
+			//print(GetHitDirection(hitVel.normalized));
 
 			if (glove.gloveColor != boxColor || hitVel.sqrMagnitude < hitVelSqrThreshold) return;
 
@@ -261,7 +261,7 @@ public class Beat : MonoBehaviour, IPooledObject
 					Hit();
 					break;
 				case BoxType.Slider:
-					Hit(5);
+					Hit(50);
 					break;
 				case BoxType.Directional:
 					//Check whether Direction is Correct
