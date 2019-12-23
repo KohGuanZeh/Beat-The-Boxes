@@ -44,6 +44,15 @@ public class BeatmapData
 		audio = Resources.Load<AudioClip>(audioFilePath);
 		mainSplash = Resources.Load<Texture2D>(imgFilePath);
 	}
+
+	public bool RemoveFromJson()
+	{
+		if (!audio) return true;
+		mapInfos.RemoveAll(item => !System.IO.File.Exists(string.Format("{0}/Resources/{1}/{2}.osu", Application.dataPath, folderName, item.mapName)));
+		if (mapInfos.Count == 0) return true;
+
+		return false;
+	}
 }
 
 [System.Serializable] //Needed since Json does not allow to Save List or Arrays by themselves

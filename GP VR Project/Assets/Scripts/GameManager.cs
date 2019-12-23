@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 				if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
 			}
 
-			if (!songPlayer.isPlaying && beats.Count == 0) OnSongEnd(); 
+			if (!songPlayer.isPlaying && beats.Count == 0 && gameState == GameState.OnPlay) OnSongEnd(); 
 		}
 
 		//For Pause
@@ -153,6 +153,8 @@ public class GameManager : MonoBehaviour
 	public void InitialiseBeatMap(/*BeatmapData bmd, BeatmapInfo bmi*/) //BMD to Load Clips, BMI to Load Map. Currently Using Variables instead of Parameters
 	{
 		string mapPath = GetMapPath(OszUnpacker.bmds[bmdIndex].folderName, OszUnpacker.bmds[bmdIndex].mapInfos[bmiIndex].mapName);
+		songPlayer.Stop();
+		songPlayer.loop = false;
 		songPlayer.clip = OszUnpacker.bmds[bmdIndex].audio;
 		beatmap = BeatmapDecoder.Decode(mapPath);
 		beats = beatmap.HitObjects;
@@ -259,6 +261,9 @@ public class GameManager : MonoBehaviour
 
 		UIManager.inst.PopulateScore(scoreInfo, isNewHighscore);
 		UIManager.inst.ShowEndScore();
+
+		ResetScoring();
+		UIManager.inst.UpdateScores(scoreInfo.score, combo, scoreMult);
 	}
 	#endregion
 
@@ -386,7 +391,7 @@ public class GameManager : MonoBehaviour
 
 	public void ReturnAllSpawnedBeatsToPool()
 	{
-		foreach (Beat beat in FindObjectsOfType<Beat>()) objPooler.ReturnToPool(beat.gameObject, beat.GetPoolTag());
+		foreach (Beat beat in FindObjectsOfType<Beat>()) beat.ForceDespawn(false); //objPooler.ReturnToPool(beat.gameObject, beat.GetPoolTag());
 	}
 	#endregion
 

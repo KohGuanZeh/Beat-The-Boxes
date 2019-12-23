@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
 	public static UIManager inst;
 	public static bool isTransitioning; //Static Bool to prevent Button Events from Triggering as it Plays Animation
 	[SerializeField] GameManager gm;
-	[SerializeField] List<BeatmapData> bmds;
 	[SerializeField] BeatmapUIObj songObjPrefab;
 	[SerializeField] GraphicRaycaster raycaster;
 
@@ -87,6 +86,10 @@ public class UIManager : MonoBehaviour
 	[SerializeField] ScrollRect scroll;
 	[SerializeField] Vector2 songSelectNormalizedPos;
 
+	[Header("For Button SFX")]
+	[SerializeField] AudioSource buttonSfxPlayer;
+	[SerializeField] AudioClip[] buttonSounds;
+
 	[Header("For Animations")]
 	[SerializeField] Animator anim;
 	[SerializeField] int selectPhase = 0;
@@ -104,7 +107,6 @@ public class UIManager : MonoBehaviour
 	void Start()
 	{
 		gm = GameManager.inst;
-		bmds = OszUnpacker.bmds;
 		anim = GetComponent<Animator>();
 		songObjs = new List<BeatmapUIObj>();
 		beatmaps = new List<BeatmapUIObj>();
@@ -123,10 +125,8 @@ public class UIManager : MonoBehaviour
 		sliders[0].value = PlayerPrefs.GetFloat("Master Volume", 1);
 		sliders[1].value = PlayerPrefs.GetFloat("Music Volume", 1);
 		sliders[2].value = PlayerPrefs.GetFloat("Sound Volume", 1);
-	}
 
-	private void Update()
-	{
+		buttonSfxPlayer.ignoreListenerPause = true;
 	}
 
 	public void UpdateScores(int score, int combo, int scoreMult)
@@ -143,10 +143,12 @@ public class UIManager : MonoBehaviour
 
 	public void PopulateSongSelect()
 	{
-		songHolder.sizeDelta = new Vector2(sizePerNewObj * bmds.Count, songHolder.sizeDelta.y);
+		foreach (BeatmapUIObj songObj in songObjs) Destroy(songObj);
+
+		songHolder.sizeDelta = new Vector2(sizePerNewObj * OszUnpacker.bmds.Count, songHolder.sizeDelta.y);
 		content.sizeDelta = new Vector2(songHolder.sizeDelta.x + sizePerNewObj * 6, content.sizeDelta.y); //6 because can view max 7 at once. 3 at start, 3 at end. Required so that the First and Last Obj can be at the middle
 
-		for (int i = 0; i < bmds.Count; i++)
+		for (int i = 0; i < OszUnpacker.bmds.Count; i++)
 		{
 			OszUnpacker.bmds = OszUnpacker.LoadBeatmapData();
 			BeatmapUIObj songObj = Instantiate(songObjPrefab, songHolder);
@@ -187,6 +189,15 @@ public class UIManager : MonoBehaviour
 		OnHoverSelect(songObjs[index]);
 	}
 
+	public void SelectSpecificSong(int index)
+	{
+		if (index >= songObjs.Count) return;
+		content.anchoredPosition = new Vector2(-35 * index, content.anchoredPosition.y);
+		scroll.normalizedPosition = scroll.normalizedPosition;
+		//songObjs[index].anim.SetBool("Is Hovering", true);
+		OnHoverSelect(songObjs[index]);
+	}
+
 	public bool CanTriggerScrollButtons()
 	{
 		//print(scroll.velocity.sqrMagnitude);
@@ -214,6 +225,8 @@ public class UIManager : MonoBehaviour
 				gm.songPlayer.clip = currentSelectedSong.audio;
 				gm.songPlayer.Play();
 
+				PlayButtonSound(0);
+
 				anim.SetTrigger("New Select");
 				break;
 
@@ -232,6 +245,8 @@ public class UIManager : MonoBehaviour
 				mapTitlePrompt.text = bmi.mapName;
 
 				RepopulateHighscores(bmi);
+
+				PlayButtonSound(0);
 
 				anim.SetTrigger("New Select");
 				break;
@@ -283,6 +298,12 @@ public class UIManager : MonoBehaviour
 	#endregion
 
 	#region Direct Button Functions
+	public void PlayButtonSound(int clip)
+	{
+		buttonSfxPlayer.clip = buttonSounds[clip];
+		buttonSfxPlayer.Play();
+	}
+
 	public void StartGame()
 	{
 		if (isTransitioning) return; //Prevent Multiple Calls
@@ -345,6 +366,8 @@ public class UIManager : MonoBehaviour
 				gm.ReturnAllSpawnedBeatsToPool();
 				AudioListener.pause = false;
 
+				gm.songPlayer.loop = true;
+
 				gm.gameState = GameState.Menu;
 				selectPhase = 1;
 				anim.SetInteger("Select Phase", selectPhase);
@@ -362,9 +385,12 @@ public class UIManager : MonoBehaviour
 				});
 				break;
 			case GameState.Ended:
+				gm.songPlayer.loop = true;
+
 				gm.gameState = GameState.Menu;
 				selectPhase = 1;
 				anim.SetInteger("Select Phase", selectPhase);
+
 				CloseOpenMenu(1);
 				break;
 		}

@@ -62,6 +62,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		print(scrollRect.velocity.sqrMagnitude);
 		UIManager.isTransitioning = true; //Need Manually Set to True as it is not Linked with Canvas UI
 		UIManager.inst.SaveScrollPosition();
+		UIManager.inst.PlayButtonSound(0);
 		anim.SetBool("Clicked", true);
 		anim.SetBool("Is Hovering", false);
 
@@ -78,6 +79,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		print(scrollRect.velocity.sqrMagnitude);
 		UIManager.isTransitioning = true; //Need Manually Set to True as it is not Linked with Canvas UI
 		UIManager.inst.SaveScrollPosition();
+		UIManager.inst.PlayButtonSound(0);
 		anim.SetBool("Clicked", true);
 		anim.SetBool("Is Hovering", false);
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Particles : MonoBehaviour, IPooledObject
 {
-	ParticleSystem pSys;
+	[SerializeField] ParticleSystem pSys;
+	[SerializeField] AudioSource audio;
+	[SerializeField] string poolTag;
 
     // Update is called once per frame
     void Update()
@@ -15,7 +17,9 @@ public class Particles : MonoBehaviour, IPooledObject
 	public void OnObjectSpawn()
 	{
 		if (!pSys) pSys = GetComponent<ParticleSystem>();
+		if (!audio) audio = GetComponent<AudioSource>();
 		pSys.Play(true);
+		audio.Play();
 	}
 
 	public void OnObjectDespawn()
@@ -25,6 +29,6 @@ public class Particles : MonoBehaviour, IPooledObject
 
 	public string GetPoolTag()
 	{
-		return "Particles";
+		return poolTag;
 	}
 }

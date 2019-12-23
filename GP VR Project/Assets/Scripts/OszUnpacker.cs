@@ -22,10 +22,12 @@ public class OszUnpacker : MonoBehaviour
 	public static List<BeatmapData> bmds; //For Other Classes to Access this BMD
 
 	[Header("For Osz Unpacking")]
+	public static bool unpackingInProgress;
 	[SerializeField] DirectoryInfo streamingAssetsDirInfo;
 	[SerializeField] string tempPath; //Cache Temp Path as it will always be used to Dump all Files from Osz first when Extracting
-	[SerializeField] bool unpackingInProgress;
+	[SerializeField] bool runtimeUnpacking;
 	[SerializeField] GameObject overlayCanvas;
+	[SerializeField] BeatmapData lastAddedBmd;
 
 	/*public delegate void VoidDelegate();
 	public VoidDelegate OnUnpackedEnded;*/
@@ -57,7 +59,12 @@ public class OszUnpacker : MonoBehaviour
 		if (unpackingInProgress || GameManager.inst.gameState != GameState.Menu) return;
 
 		FileInfo[] oszFiles = GetNewOszFiles();
-		if (oszFiles.Length > 0) unpackingInProgress = true;
+		overlayCanvas.gameObject.SetActive(true);
+		if (oszFiles.Length > 0)
+		{
+			unpackingInProgress = true;
+			runtimeUnpacking = true;
+		}
 		else return;
 
 		StartCoroutine(UnpackOszFiles(oszFiles));
@@ -67,19 +74,29 @@ public class OszUnpacker : MonoBehaviour
 	{
 		foreach (FileInfo oszFile in oszFiles) UnpackOszFile(oszFile);
 
+		runtimeUnpacking = false;
+		unpackingInProgress = false;
+		SaveBeatmapData(bmds);
+		overlayCanvas.gameObject.SetActive(false);
+
+		UIManager.inst.BackToSongSelect();
+		UIManager.inst.PopulateSongSelect();
+		UIManager.inst.SelectSpecificSong(bmds.IndexOf(lastAddedBmd));
+
 		yield return null;
 	}
 
 	#region For Saving and Loading Beatmap Data
 	public static List<BeatmapData> LoadBeatmapData()
 	{
-		string jsonPath = string.Format("{0}/{1}/{2}", Application.dataPath, "Beatmaps", "MapData.txt");
+		string jsonPath = string.Format("{0}/{1}", Application.streamingAssetsPath, "MapData.txt");
 
 		if (File.Exists(jsonPath))
 		{
 			string json = File.ReadAllText(jsonPath);
 			BeatmapDataWrapper bmWrapper = JsonUtility.FromJson<BeatmapDataWrapper>(json);
 			foreach (BeatmapData bmd in bmWrapper.beatmaps) bmd.LoadAssets();
+			bmWrapper.beatmaps.RemoveAll(item => item.RemoveFromJson());
 			return bmWrapper.beatmaps;
 		}
 		else return new List<BeatmapData>();
@@ -87,7 +104,7 @@ public class OszUnpacker : MonoBehaviour
 
 	public static void SaveBeatmapData(List<BeatmapData> beatmaps)
 	{
-		string jsonPath = string.Format("{0}/{1}/{2}", Application.dataPath, "Beatmaps", "MapData.txt");
+		string jsonPath = string.Format("{0}/{1}", Application.streamingAssetsPath, "MapData.txt");
 
 		beatmaps.Sort((x, y) => x.folderName.CompareTo(y.folderName));
 		BeatmapDataWrapper bmWrapper = new BeatmapDataWrapper(beatmaps); //Create a Temp Wrapper so it can be stored as Json
@@ -177,7 +194,10 @@ public class OszUnpacker : MonoBehaviour
 		}
 
 		bmd.mapInfos.Sort((x, y) => x.difficulty.CompareTo(y.difficulty));
+		bmd.LoadAssets();
 		if (!bmdExists) bmds.Add(bmd);
+
+		if (runtimeUnpacking) lastAddedBmd = bmd;
 
 		/*DirectoryInfo dir = new DirectoryInfo(tempPath);
 		foreach (FileInfo file in dir.GetFiles()) File.Delete(file.FullName);*/

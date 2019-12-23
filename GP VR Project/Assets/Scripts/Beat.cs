@@ -42,6 +42,11 @@ public class Beat : MonoBehaviour, IPooledObject
 	[Header("Hit Threshold")]
 	[SerializeField] float hitVelSqrThreshold; //Square Magnitude of Required Velocity to Count as Hit 
 
+	[Header("Hit and Despawn Effects")]
+	[SerializeField] AudioSource sfx;
+	[SerializeField] AudioClip hitSound;
+	[SerializeField] AudioClip despawnSound;
+
 	// Update is called once per frame
 	void Update()
     {
@@ -174,11 +179,14 @@ public class Beat : MonoBehaviour, IPooledObject
 		if (GetOffsetRatio() >= 1.0f) Hit();
 	}
 
-	public void Hit(int score = 300, bool destroy = true)
+	public void Hit(int score = 300)
 	{
 		//Play Sound Effect
 		gm.AddScore(score);
-		if (destroy) ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
+		ObjectPooling.inst.SpawnFromPool("Hit Particles", transform.position, Quaternion.identity);
+		//sfx.clip = hitSound;
+		//sfx.Play();
+		ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag()); //Destroy(gameObject);
 	}
 
 	public Direction GetHitDirection(Vector3 hitDir)
@@ -219,7 +227,7 @@ public class Beat : MonoBehaviour, IPooledObject
 	#region Pooling Functions
 	public void OnObjectSpawn()
 	{
-		
+		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", transform.position, Quaternion.Euler(-90, 0, 0));
 	}
 
 	public void OnObjectDespawn()
@@ -240,6 +248,17 @@ public class Beat : MonoBehaviour, IPooledObject
 			default:
 				return "Normal";
 		}
+	}
+	#endregion
+
+	#region Forced Despawn
+	public void ForceDespawn(bool inDestroyZone = true)
+	{
+		Quaternion rotation = inDestroyZone ? Quaternion.identity : Quaternion.Euler(-90, 0, 0);
+		ObjectPooling.inst.SpawnFromPool("Spawn Despawn Particles", transform.position, rotation);
+		//sfx.clip = despawnSound;
+		//sfx.Play();
+		ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag());
 	}
 	#endregion
 
@@ -272,7 +291,7 @@ public class Beat : MonoBehaviour, IPooledObject
 		else if (other.tag == "Destroy Zone")
 		{
 			gm.BreakCombo();
-			ObjectPooling.inst.ReturnToPool(gameObject, GetPoolTag());
+			ForceDespawn();
 		}
 	}
 	#endregion
