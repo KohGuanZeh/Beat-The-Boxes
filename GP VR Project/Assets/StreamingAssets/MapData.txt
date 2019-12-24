@@ -7,7 +7,22 @@
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Easy]",
                     "creator": "Doormat",
                     "difficulty": 3.0,
-                    "scores": []
+                    "scores": [
+                        {
+                            "grade": 4,
+                            "score": 0,
+                            "maxCombo": 0,
+                            "hits": 0,
+                            "miss": 186
+                        },
+                        {
+                            "grade": 4,
+                            "score": 0,
+                            "maxCombo": 0,
+                            "hits": 0,
+                            "miss": 186
+                        }
+                    ]
                 },
                 {
                     "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Easy]",
@@ -111,10 +126,10 @@
             "audioFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/audio",
             "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice",
             "audio": {
-                "instanceID": 20048
+                "instanceID": 19962
             },
             "mainSplash": {
-                "instanceID": 22048
+                "instanceID": 21962
             }
         },
         {
@@ -144,10 +159,10 @@
             "audioFilePath": "Beatmaps/Anoko Secret - 855906/audio",
             "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal",
             "audio": {
-                "instanceID": 27206
+                "instanceID": 27118
             },
             "mainSplash": {
-                "instanceID": 28354
+                "instanceID": 28266
             }
         },
         {
@@ -177,10 +192,10 @@
             "audioFilePath": "Beatmaps/As You Like It - 841277/audio",
             "imgFilePath": "Beatmaps/As You Like It - 841277/evew",
             "audio": {
-                "instanceID": 19712
+                "instanceID": 19626
             },
             "mainSplash": {
-                "instanceID": 22368
+                "instanceID": 22282
             }
         },
         {
@@ -222,10 +237,10 @@
             "audioFilePath": "Beatmaps/Catch the Moment - 572897/audio",
             "imgFilePath": "Beatmaps/Catch the Moment - 572897/BG",
             "audio": {
-                "instanceID": 17304
+                "instanceID": 17218
             },
             "mainSplash": {
-                "instanceID": 28716
+                "instanceID": 28628
             }
         },
         {
@@ -273,10 +288,10 @@
             "audioFilePath": "Beatmaps/Fist Bump - 779577/audio",
             "imgFilePath": "Beatmaps/Fist Bump - 779577/BG",
             "audio": {
-                "instanceID": 25784
+                "instanceID": 25696
             },
             "mainSplash": {
-                "instanceID": 23332
+                "instanceID": 23246
             }
         },
         {
@@ -324,10 +339,10 @@
             "audioFilePath": "Beatmaps/Future Coaster - 1056866/audio",
             "imgFilePath": "Beatmaps/Future Coaster - 1056866/thanks nifty",
             "audio": {
-                "instanceID": 16502
+                "instanceID": 16416
             },
             "mainSplash": {
-                "instanceID": 27454
+                "instanceID": 27366
             }
         },
         {
@@ -357,10 +372,10 @@
             "audioFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/audio",
             "imgFilePath": "Beatmaps/Harumodoki (TV Size) - 545139/HaruModokiBackgroundImage",
             "audio": {
-                "instanceID": 24374
+                "instanceID": 24288
             },
             "mainSplash": {
-                "instanceID": 26078
+                "instanceID": 25990
             }
         },
         {
@@ -423,10 +438,10 @@
             "audioFilePath": "Beatmaps/Hello,world! - 302799/Hello,world!",
             "imgFilePath": "Beatmaps/Hello,world! - 302799/e45f6c90f603738d196de985b71bb051f919ecd5",
             "audio": {
-                "instanceID": 29856
+                "instanceID": 29768
             },
             "mainSplash": {
-                "instanceID": 22378
+                "instanceID": 22292
             }
         },
         {
@@ -486,10 +501,10 @@
             "audioFilePath": "Beatmaps/in the Garden - 492525/audio",
             "imgFilePath": "Beatmaps/in the Garden - 492525/flowers",
             "audio": {
-                "instanceID": 22158
+                "instanceID": 22072
             },
             "mainSplash": {
-                "instanceID": 24754
+                "instanceID": 24666
             }
         },
         {
@@ -537,10 +552,10 @@
             "audioFilePath": "Beatmaps/Inferno (TV Size) - 999645/te",
             "imgFilePath": "Beatmaps/Inferno (TV Size) - 999645/720685",
             "audio": {
-                "instanceID": 17492
+                "instanceID": 17406
             },
             "mainSplash": {
-                "instanceID": 28006
+                "instanceID": 27918
             }
         },
         {
@@ -606,10 +621,10 @@
             "audioFilePath": "Beatmaps/L.L.L. - 334466/lol",
             "imgFilePath": "Beatmaps/L.L.L. - 334466/51338548_p0",
             "audio": {
-                "instanceID": 30178
+                "instanceID": 30090
             },
             "mainSplash": {
-                "instanceID": 26148
+                "instanceID": 26060
             }
         },
         {
@@ -657,10 +672,10 @@
             "audioFilePath": "Beatmaps/Pride Kakumei - 335534/Pride Revolution",
             "imgFilePath": "Beatmaps/Pride Kakumei - 335534/BG+Aerous+Coke",
             "audio": {
-                "instanceID": 17542
+                "instanceID": 17456
             },
             "mainSplash": {
-                "instanceID": 28034
+                "instanceID": 27946
             }
         },
         {
@@ -702,10 +717,10 @@
             "audioFilePath": "Beatmaps/Pride Kakumei - 342242/01. ",
             "imgFilePath": "Beatmaps/Pride Kakumei - 342242/kakumei",
             "audio": {
-                "instanceID": 22356
+                "instanceID": 22270
             },
             "mainSplash": {
-                "instanceID": 24002
+                "instanceID": 23916
             }
         },
         {
@@ -759,10 +774,10 @@
             "audioFilePath": "Beatmaps/Wolf - 514507/audio",
             "imgFilePath": "Beatmaps/Wolf - 514507/massugu",
             "audio": {
-                "instanceID": 27832
+                "instanceID": 27744
             },
             "mainSplash": {
-                "instanceID": 26226
+                "instanceID": 26138
             }
         }
     ]

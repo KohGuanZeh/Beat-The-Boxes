@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 				if (GetTrackTime() + bufferTime >= (double)beats[0].StartTime / 1000) SpawnBeat();
 			}
 
-			if (!songPlayer.isPlaying && beats.Count == 0 && gameState == GameState.OnPlay) OnSongEnd(); 
+			if (!songPlayer.isPlaying && AudioSettings.dspTime >= trackEndTime && gameState == GameState.OnPlay) OnSongEnd();
 		}
 
 		//For Pause
@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
 
 		trackStartTime = AudioSettings.dspTime + startTimeOffset;
 		trackEndTime = AudioSettings.dspTime + 1.5f + (float)(beats[beats.Count - 1].EndTime) / 1000; //Get the Track End Time
+		print(trackEndTime - trackStartTime);
 		songPlayer.PlayScheduled(trackStartTime);
 
 		gameState = GameState.OnPlay;
@@ -201,8 +202,9 @@ public class GameManager : MonoBehaviour
 				string tag = isDirectional ? "Directional" : "Slider";
 
 				//Instantiate(beatPrefabs[1], beatSpawnPos.position, Quaternion.identity);
-				Beat beat = objPooler.SpawnFromPool(tag, beatSpawnPos.position, Quaternion.identity, beatSpawnPos).GetComponent<Beat>(); 
-				beat.InitialiseBeat(this, beatSpawnPos.position, spawnHitDist);
+				Vector3 posOffset = isDirectional ? Vector3.zero : new Vector3(0, 0.15f, 0);
+				Beat beat = objPooler.SpawnFromPool(tag, beatSpawnPos.position + posOffset, Quaternion.identity, beatSpawnPos).GetComponent<Beat>(); 
+				beat.InitialiseBeat(this, beatSpawnPos.position + posOffset, spawnHitDist);
 
 				//Set Slider Beats to their Correct Timing
 				double additionalOffset = beatInterval * i;

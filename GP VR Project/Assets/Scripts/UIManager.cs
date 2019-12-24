@@ -199,6 +199,7 @@ public class UIManager : MonoBehaviour
 			beatmapObj.AssignBmData(bmdIndex, scroll);
 			beatmapObj.AssignBmInfo(i);
 			beatmapObj.mainImg.SizeToFillParent();
+			beatmapObj.transform.SetSiblingIndex(i);
 			beatmaps.Add(beatmapObj);
 		}
 	}

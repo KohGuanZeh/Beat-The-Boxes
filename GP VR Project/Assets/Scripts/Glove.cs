@@ -18,7 +18,6 @@ public class Glove : MonoBehaviour
 	[SerializeField] VRTK_UIPointer uiPointer;
 	[SerializeField] VRTK_StraightPointerRenderer straightPointer;
 	[SerializeField] VRTK_Pointer vrPointer;
-	[SerializeField] VRTK_UIGraphicRaycaster raycaster;
 
 	public delegate void VoidDelegate();
 	VoidDelegate UpdateInitialiser;

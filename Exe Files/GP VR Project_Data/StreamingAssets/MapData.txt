@@ -1,6 +1,210 @@
 {
     "beatmaps": [
         {
+            "folderName": "ADAMAS (TV Size) - 859608",
+            "mapInfos": [
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Easy]",
+                    "creator": "Doormat",
+                    "difficulty": 3.0,
+                    "scores": [
+                        {
+                            "grade": 4,
+                            "score": 0,
+                            "maxCombo": 0,
+                            "hits": 0,
+                            "miss": 186
+                        },
+                        {
+                            "grade": 4,
+                            "score": 0,
+                            "maxCombo": 0,
+                            "hits": 0,
+                            "miss": 186
+                        }
+                    ]
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Easy]",
+                    "creator": "Doormat",
+                    "difficulty": 3.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Easy]",
+                    "creator": "Doormat",
+                    "difficulty": 3.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Normal]",
+                    "creator": "Doormat",
+                    "difficulty": 4.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Normal]",
+                    "creator": "Doormat",
+                    "difficulty": 4.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Normal]",
+                    "creator": "Doormat",
+                    "difficulty": 4.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Hard]",
+                    "creator": "Doormat",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Hard]",
+                    "creator": "Doormat",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Hard]",
+                    "creator": "Doormat",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Insane]",
+                    "creator": "Doormat",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Insane]",
+                    "creator": "Doormat",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kyle73's Insane]",
+                    "creator": "Doormat",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Insane]",
+                    "creator": "Doormat",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [StarR's Expert]",
+                    "creator": "Doormat",
+                    "difficulty": 8.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Monstrata's Night Sky]",
+                    "creator": "Doormat",
+                    "difficulty": 8.699999809265137,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Kibbleru's Blue Rose]",
+                    "creator": "Doormat",
+                    "difficulty": 8.800000190734864,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - ADAMAS (TV Size) (Doormat) [Fragrant Olive]",
+                    "creator": "Doormat",
+                    "difficulty": 9.0,
+                    "scores": []
+                }
+            ],
+            "songName": "ADAMAS (TV Size)",
+            "artistName": "LiSA",
+            "audioFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/audio",
+            "imgFilePath": "Beatmaps/ADAMAS (TV Size) - 859608/sao alice",
+            "audio": {
+                "m_FileID": 2240,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2242,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Anoko Secret - 855906",
+            "mapInfos": [
+                {
+                    "mapName": "Eve - Anoko Secret (Nevo) [Agatsu's Normal]",
+                    "creator": "Nevo",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Eve - Anoko Secret (Nevo) [hyper's Hard]",
+                    "creator": "Nevo",
+                    "difficulty": 6.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Eve - Anoko Secret (Nevo) [Kuma]",
+                    "creator": "Nevo",
+                    "difficulty": 8.399999618530274,
+                    "scores": []
+                }
+            ],
+            "songName": "Anoko Secret",
+            "artistName": "Eve",
+            "audioFilePath": "Beatmaps/Anoko Secret - 855906/audio",
+            "imgFilePath": "Beatmaps/Anoko Secret - 855906/normal",
+            "audio": {
+                "m_FileID": 2244,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2246,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "As You Like It - 841277",
+            "mapInfos": [
+                {
+                    "mapName": "Eve - As You Like It (Anishina Kodoku) [Hard]",
+                    "creator": "Anishina Kodoku",
+                    "difficulty": 6.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Eve - As You Like It (Anishina Kodoku) [619's Insane]",
+                    "creator": "Anishina Kodoku",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Eve - As You Like It (Anishina Kodoku) [Honne]",
+                    "creator": "Anishina Kodoku",
+                    "difficulty": 8.0,
+                    "scores": []
+                }
+            ],
+            "songName": "As You Like It",
+            "artistName": "Eve",
+            "audioFilePath": "Beatmaps/As You Like It - 841277/audio",
+            "imgFilePath": "Beatmaps/As You Like It - 841277/evew",
+            "audio": {
+                "m_FileID": 2248,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2250,
+                "m_PathID": 0
+            }
+        },
+        {
             "folderName": "Catch the Moment - 572897",
             "mapInfos": [
                 {
@@ -48,43 +252,108 @@
             }
         },
         {
-            "folderName": "Dive to World - 0",
+            "folderName": "Fist Bump - 779577",
             "mapInfos": [
                 {
-                    "mapName": "Cherry Blossom - Dive to World (hutka) [Normal]",
-                    "creator": "hutka",
-                    "difficulty": 1.0,
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Cup]",
+                    "creator": "rew0825",
+                    "difficulty": 6.0,
                     "scores": []
                 },
                 {
-                    "mapName": "Cherry Blossom - Dive to World (hutka) [dksslqj's Normal+]",
-                    "creator": "hutka",
-                    "difficulty": 4.0,
-                    "scores": []
-                },
-                {
-                    "mapName": "Cherry Blossom - Dive to World (hutka) [Hard]",
-                    "creator": "hutka",
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Salad]",
+                    "creator": "rew0825",
                     "difficulty": 7.0,
                     "scores": []
                 },
                 {
-                    "mapName": "Cherry Blossom - Dive to World (hutka) [orion's Little Streams]",
-                    "creator": "hutka",
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Platter]",
+                    "creator": "rew0825",
                     "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Rain]",
+                    "creator": "rew0825",
+                    "difficulty": 9.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Overdose]",
+                    "creator": "rew0825",
+                    "difficulty": 9.300000190734864,
+                    "scores": []
+                },
+                {
+                    "mapName": "Douglas Robb (Hoobastank) - Fist Bump (rew0825) [Ascendance's Ultimate]",
+                    "creator": "rew0825",
+                    "difficulty": 9.600000381469727,
                     "scores": []
                 }
             ],
-            "songName": "Dive to World",
-            "artistName": "Cherry Blossom",
-            "audioFilePath": "Beatmaps/Dive to World - 0/01 - DIVE TO WORLD",
-            "imgFilePath": "Beatmaps/Dive to World - 0/back ground",
+            "songName": "Fist Bump",
+            "artistName": "Douglas Robb (Hoobastank)",
+            "audioFilePath": "Beatmaps/Fist Bump - 779577/audio",
+            "imgFilePath": "Beatmaps/Fist Bump - 779577/BG",
             "audio": {
-                "m_FileID": 2256,
+                "m_FileID": 2260,
                 "m_PathID": 0
             },
             "mainSplash": {
-                "m_FileID": 2258,
+                "m_FileID": 2262,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Future Coaster - 1056866",
+            "mapInfos": [
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Kantan]",
+                    "creator": "_DUSK_",
+                    "difficulty": 3.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Futsuu]",
+                    "creator": "_DUSK_",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Muzukashii]",
+                    "creator": "_DUSK_",
+                    "difficulty": 5.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Oni]",
+                    "creator": "_DUSK_",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Inner Oni]",
+                    "creator": "_DUSK_",
+                    "difficulty": 6.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Sakuzyo - Future Coaster (_DUSK_) [Future]",
+                    "creator": "_DUSK_",
+                    "difficulty": 7.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Future Coaster",
+            "artistName": "Sakuzyo",
+            "audioFilePath": "Beatmaps/Future Coaster - 1056866/audio",
+            "imgFilePath": "Beatmaps/Future Coaster - 1056866/thanks nifty",
+            "audio": {
+                "m_FileID": 2264,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2266,
                 "m_PathID": 0
             }
         },
@@ -130,7 +399,22 @@
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Easy]",
                     "creator": "tutuhaha",
                     "difficulty": 2.0,
-                    "scores": []
+                    "scores": [
+                        {
+                            "grade": 0,
+                            "score": 1986900,
+                            "maxCombo": 358,
+                            "hits": 358,
+                            "miss": 0
+                        },
+                        {
+                            "grade": 0,
+                            "score": 2075400,
+                            "maxCombo": 366,
+                            "hits": 366,
+                            "miss": 0
+                        }
+                    ]
                 },
                 {
                     "mapName": "BUMP OF CHICKEN - Hello,world! (tutuhaha) [Normal]",
@@ -238,6 +522,59 @@
             },
             "mainSplash": {
                 "m_FileID": 2278,
+                "m_PathID": 0
+            }
+        },
+        {
+            "folderName": "Inferno (TV Size) - 999645",
+            "mapInfos": [
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Easy]",
+                    "creator": "Amandia",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Normal]",
+                    "creator": "Amandia",
+                    "difficulty": 4.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Hard]",
+                    "creator": "Amandia",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Insane]",
+                    "creator": "Amandia",
+                    "difficulty": 7.5,
+                    "scores": []
+                },
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Monstrata's Insane]",
+                    "creator": "Amandia",
+                    "difficulty": 8.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "Mrs. GREEN APPLE - Inferno (TV Size) (Amandia) [Fire Force]",
+                    "creator": "Amandia",
+                    "difficulty": 8.5,
+                    "scores": []
+                }
+            ],
+            "songName": "Inferno (TV Size)",
+            "artistName": "Mrs. GREEN APPLE",
+            "audioFilePath": "Beatmaps/Inferno (TV Size) - 999645/te",
+            "imgFilePath": "Beatmaps/Inferno (TV Size) - 999645/720685",
+            "audio": {
+                "m_FileID": 2282,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2280,
                 "m_PathID": 0
             }
         },

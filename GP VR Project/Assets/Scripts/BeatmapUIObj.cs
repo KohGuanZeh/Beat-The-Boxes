@@ -26,6 +26,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public bool checkIfIsScrolling;
 	public float checkTime;
 	public float hoverTime;
+	public bool selected;
 
 	[Header("For Beatmap Select Only")]
 	public TextMeshProUGUI difficulty;
@@ -107,6 +108,8 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		anim.SetBool("Is Hovering", false);
 		anim.SetBool("Clicked", false);
 		anim.Update(10);
+
+		selected = false;
 		//UIManager.inst.OnTransitionEnd -= ResetButtonAnimator; //Called Through Delegate so that it can be handled on UIManager End instead
 	}
 	#endregion
@@ -122,6 +125,7 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	{
 		isHovering = false;
 		anim.SetBool("Is Hovering", false);
+		selected = false;
 	}
 
 	void SelectOnHover()
@@ -129,7 +133,11 @@ public class BeatmapUIObj : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		if (isHovering && !UIManager.isTransitioning)
 		{
 			hoverTime = Mathf.Max(hoverTime + Time.deltaTime, 0.5f);
-			if (hoverTime >= 0.5f) UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
+			if (hoverTime >= 0.5f && !selected)
+			{
+				UIManager.inst.OnHoverSelect(this); //Display the Thing on Big Screen
+				selected = true;
+			}
 		}
 		else hoverTime = 0;
 	}

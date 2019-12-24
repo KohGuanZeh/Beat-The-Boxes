@@ -67,13 +67,13 @@ public class Beat : MonoBehaviour, IPooledObject
 			switch (boxType)
 			{
 				case BoxType.Normal:
-					hitVelSqrThreshold = 25;
+					hitVelSqrThreshold = 0.5f;
 					break;
 				case BoxType.Directional:
-					hitVelSqrThreshold = 25;
+					hitVelSqrThreshold = 0.5f;
 					break;
 				case BoxType.Slider:
-					hitVelSqrThreshold = 20;
+					hitVelSqrThreshold = 0.25f;
 					break;
 			}
 		}
@@ -288,6 +288,33 @@ public class Beat : MonoBehaviour, IPooledObject
 		{
 			gm.BreakCombo();
 			ForceDespawn();
+		}
+	}
+
+	void OnTriggerStay(Collider other)
+	{
+		if (other.tag == "Player")
+		{
+			Glove glove = other.GetComponent<Glove>();
+			Vector3 hitVel = glove.GetControllerVelocity();
+
+			//print(GetHitDirection(hitVel.normalized));
+
+			if (glove.gloveColor != boxColor || hitVel.sqrMagnitude < hitVelSqrThreshold) return;
+
+			switch (boxType)
+			{
+				case BoxType.Normal:
+					Hit();
+					break;
+				case BoxType.Slider:
+					Hit(50);
+					break;
+				case BoxType.Directional:
+					//Check whether Direction is Correct
+					if (hitDir == GetHitDirection(hitVel.normalized)) Hit(); //Check Directional Input
+					break;
+			}
 		}
 	}
 	#endregion
