@@ -1,6 +1,53 @@
 {
     "beatmaps": [
         {
+            "folderName": "Catch the Moment - 572897",
+            "mapInfos": [
+                {
+                    "mapName": "LiSA - Catch the Moment (Delis) [Satellite's Easy]",
+                    "creator": "Delis",
+                    "difficulty": 2.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - Catch the Moment (Delis) [Normal]",
+                    "creator": "Delis",
+                    "difficulty": 5.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - Catch the Moment (Delis) [Hard]",
+                    "creator": "Delis",
+                    "difficulty": 6.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - Catch the Moment (Delis) [Insane]",
+                    "creator": "Delis",
+                    "difficulty": 7.0,
+                    "scores": []
+                },
+                {
+                    "mapName": "LiSA - Catch the Moment (Delis) [Extra]",
+                    "creator": "Delis",
+                    "difficulty": 9.0,
+                    "scores": []
+                }
+            ],
+            "songName": "Catch the Moment",
+            "artistName": "LiSA",
+            "audioFilePath": "Beatmaps/Catch the Moment - 572897/audio",
+            "imgFilePath": "Beatmaps/Catch the Moment - 572897/BG",
+            "audio": {
+                "m_FileID": 2252,
+                "m_PathID": 0
+            },
+            "mainSplash": {
+                "m_FileID": 2254,
+                "m_PathID": 0
+            }
+        },
+        {
             "folderName": "Dive to World - 0",
             "mapInfos": [
                 {
